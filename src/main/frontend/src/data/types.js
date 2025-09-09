@@ -1,40 +1,132 @@
+import { ReactComponent as normalIcon } from "../assets/icons/normal.svg";
+import { ReactComponent as fireIcon } from "../assets/icons/fire.svg";
+import { ReactComponent as waterIcon } from "../assets/icons/water.svg";
+import { ReactComponent as electricIcon } from "../assets/icons/electric.svg";
+import { ReactComponent as grassIcon } from "../assets/icons/grass.svg";
+import { ReactComponent as iceIcon } from "../assets/icons/ice.svg";
+import { ReactComponent as fightingIcon } from "../assets/icons/fighting.svg";
+import { ReactComponent as poisonIcon } from "../assets/icons/poison.svg";
+import { ReactComponent as groundIcon } from "../assets/icons/ground.svg";
+import { ReactComponent as flyingIcon } from "../assets/icons/flying.svg";
+import { ReactComponent as psychicIcon } from "../assets/icons/psychic.svg";
+import { ReactComponent as bugIcon } from "../assets/icons/bug.svg";
+import { ReactComponent as rockIcon } from "../assets/icons/rock.svg";
+import { ReactComponent as ghostIcon } from "../assets/icons/ghost.svg";
+import { ReactComponent as dragonIcon } from "../assets/icons/dragon.svg";
+import { ReactComponent as darkIcon } from "../assets/icons/dark.svg";
+import { ReactComponent as steelIcon } from "../assets/icons/steel.svg";
+import { ReactComponent as fairyIcon } from "../assets/icons/fairy.svg";
+
+
 const types = [
     {
         id: 1,
-        names: { en: "Normal", ko: "노말", ja: "ノーマル" },
-        color: {normal:"#9FA19F",bright:"#C1C2C1",dark:"#676967"},
-        logo: "<svg width=\"512\" height=\"512\" viewBox=\"0 0 512 512\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-            "<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M481 256C481 380.264 380.264 481 256 481C131.736 481 31 380.264 31 256C31 131.736 131.736 31 256 31C380.264 31 481 131.736 481 256ZM384.571 256C384.571 327.008 327.008 384.571 256 384.571C184.992 384.571 127.429 327.008 127.429 256C127.429 184.992 184.992 127.429 256 127.429C327.008 127.429 384.571 184.992 384.571 256Z\" fill=\"white\"/>\n" +
-            "</svg>"
+        names: {en: "Normal", ko: "노말", ja: "ノーマル"},
+        color: {normal: "#9FA19F", bright: "#C1C2C1", dark: "#676967"},
+        logo: normalIcon
     },
     {
         id: 2,
-        names: { en: "Fighting", ko: "격투", ja: "かくとう" },
-        color: {normal:"#FF8000",bright:"#FFAC59",dark:"#A65300"},
-        logo: "<svg width=\"512\" height=\"512\" viewBox=\"0 0 512 512\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-            "<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M88.2336 42.5656C94.4299 18.1014 116.593 0 142.983 0C162.778 0 180.195 10.1847 190.279 25.6H206.792C217.051 15.0716 231.384 8.53333 247.245 8.53333C270.499 8.53333 290.471 22.5882 299.129 42.6667H312.954C321.617 37.2585 331.853 34.1333 342.818 34.1333C366.073 34.1333 386.044 48.1882 394.702 68.2667H432.297C432.618 68.2667 432.919 68.3532 433.178 68.5041C434.895 68.347 436.634 68.2667 438.391 68.2667C469.582 68.2667 494.866 93.5514 494.866 124.742V294.086L494.867 294.4L494.866 294.714V297.153C494.866 298.186 494.838 299.215 494.782 300.239C491.384 417.717 385.749 512 255.933 512C123.974 512 17 414.577 17 294.4C17 236.391 41.9249 183.683 82.5535 144.675C82.4522 201.228 83.4074 259.694 87.8107 258.691C99.6011 256.003 90.3891 80.8395 88.2336 42.5656Z\" fill=\"white\"/>\n" +
-            "</svg>"
+        names: {en: "Fighting", ko: "격투", ja: "かくとう"},
+        color: {normal: "#FF8000", bright: "#FFAC59", dark: "#A65300"},
+        logo: fightingIcon
     },
     {
         id: 3,
-        names: { en: "Flying", ko: "비행", ja: "ひこう" },
-        color: {normal:"#81B9EF",bright:"#ADD2F5",dark:"#54789B"},
-        logo: "<svg width=\"512\" height=\"512\" viewBox=\"0 0 512 512\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-            "<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M178.712 477.733C253.715 477.733 317.927 436.048 344.436 376.956C344.76 376.235 238.007 404.699 241.411 394.637C242.931 390.144 308.371 366.238 356.048 338.354C383.451 322.327 396.07 288.4 396.07 288.4C396.07 288.4 349.903 310.815 326.564 316.501C279.532 327.961 238.131 326.727 238.131 325.533C238.131 322.951 306.876 309.889 402.424 251.664C447.367 224.277 459.574 177.103 459.574 177.103C459.574 177.103 410.163 206.535 380.293 216.252C309.457 239.295 244.815 246.239 244.815 243.121C244.815 236.445 301.702 220.802 362.016 191.577C393.376 176.382 420.535 156.53 452.008 134.453C503.506 98.332 511.999 34 511.999 34C511.999 34 461.207 66.7601 436.42 77.6394C334.141 122.531 243.829 146.079 178.712 151.177C80.416 158.873 0 227.456 0 316.501C0 405.547 80.0119 477.733 178.712 477.733Z\" fill=\"white\"/>\n" +
-            "</svg>"
+        names: {en: "Flying", ko: "비행", ja: "ひこう"},
+        color: {normal: "#81B9EF", bright: "#ADD2F5", dark: "#54789B"},
+        logo: flyingIcon
     },
     {
         id: 4,
-        names: { en: "Poison", ko: "독", ja: "どく" },
-        color: {normal:"#9141CB",bright:"#B884DD",dark:"#5E2A84"},
-        logo: "<svg width=\"512\" height=\"512\" viewBox=\"0 0 512 512\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-            "<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M427.821 393.449C479.524 352.108 512 292.376 512 225.95C512 101.161 397.385 0 256 0C114.615 0 0 101.161 0 225.95C0 289.978 30.1737 347.786 78.6553 388.901C75.7171 399.046 74.1052 410.081 74.1052 421.62C74.1052 471.535 104.267 512 141.474 512C165.65 512 186.852 494.915 198.737 469.254C210.622 494.915 231.824 512 256 512C278.038 512 297.604 497.804 309.895 475.857C322.186 497.804 341.752 512 363.789 512C400.996 512 431.158 471.535 431.158 421.62C431.158 411.784 429.986 402.314 427.821 393.449ZM404.211 230.431C404.211 293.785 336.346 345.144 252.632 345.144C168.917 345.144 101.053 293.785 101.053 230.431C101.053 167.077 168.917 115.718 252.632 115.718C336.346 115.718 404.211 167.077 404.211 230.431Z\" fill=\"white\"/>\n" +
-            "</svg>"
+        names: {en: "Poison", ko: "독", ja: "どく"},
+        color: {normal: "#9141CB", bright: "#B884DD", dark: "#5E2A84"},
+        logo: poisonIcon
     },
     {
         id: 5,
-
+        names: {en: "Ground", ko: "땅", ja: "じめん"},
+        color: {normal: "#915121", bright: "#B88E6F", dark: "#5E3515"},
+        logo: groundIcon
+    },
+    {
+        id: 6,
+        names: {en: "Rock", ko: "바위", ja: "いわ"},
+        color: {normal: "#AFA981", bright: "#CBC7AD", dark: "#726E54"},
+        logo: rockIcon
+    },
+    {
+        id: 7,
+        names: {en: "Bug", ko: "벌레", ja: "むし"},
+        color: {normal: "#91A119", bright: "#B8C26A", dark: "#5E6910"},
+        logo: bugIcon
+    },
+    {
+        id: 8,
+        names: {en: "Ghost", ko: "고스트", ja: "ゴースト"},
+        color: {normal: "#704170", bright: "#A284A2", dark: "#492A49"},
+        logo: ghostIcon
+    },
+    {
+        id: 9,
+        names: {en: "Steel", ko: "강철", ja: "はがね"},
+        color: {normal: "#60A1B8", bright: "#98C2D1", dark: "#3E6978"},
+        logo: steelIcon
+    },
+    {
+        id: 10,
+        names: {en: "Fire", ko: "불꽃", ja: "ほのお"},
+        color: {normal: "#E62829", bright: "#EF7374", dark: "#961A1B"},
+        logo: fireIcon
+    },
+    {
+        id: 11,
+        names: {en: "Water", ko: "물", ja: "みず"},
+        color: {normal: "#2980EF", bright: "#74ACF5", dark: "#1B539B"},
+        logo: waterIcon
+    },
+    {
+        id: 12,
+        names: {en: "Grass", ko: "풀", ja: "くさ"},
+        color: {normal: "#3FA129", bright: "#82C274", dark: "#29691B"},
+        logo: grassIcon
+    },
+    {
+        id: 13,
+        names: {en: "Electric", ko: "전기", ja: "でんき"},
+        color: {normal: "#FAC000", bright: "#FCD659", dark: "#A37D00"},
+        logo: electricIcon
+    },
+    {
+        id: 14,
+        names: {en: "Psychic", ko: "에스퍼", ja: "エスパー"},
+        color: {normal: "#EF4179", bright: "#F584A8", dark: "#9B2A4F"},
+        logo: psychicIcon
+    },
+    {
+        id: 15,
+        names: {en: "Ice", ko: "얼음", ja: "こおり"},
+        color: {normal: "#3DCEF3", bright: "#81DFF7", dark: "#28869E"},
+        logo: iceIcon
+    },
+    {
+        id: 16,
+        names: {en: "Dragon", ko: "드래곤", ja: "ドラゴン"},
+        color: {normal: "#5060E1", bright: "#8D98EC", dark: "#343E92"},
+        logo: dragonIcon
+    },
+    {
+        id: 17,
+        names: {en: "Dark", ko: "악", ja: "あく"},
+        color: {normal: "#624D4E", bright: "#998B8C", dark: "#403233"},
+        logo: darkIcon
+    },
+    {
+        id: 18,
+        names: {en: "Fairy", ko: "페어리", ja: "フェアリー"},
+        color: {normal: "#EF70EF", bright: "#F5A2F5", dark: "#9B499B"},
+        logo: fairyIcon
     },
 ];
 
-export  default types;
+export default types;

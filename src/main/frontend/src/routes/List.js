@@ -1,4 +1,6 @@
 import {useEffect, useState} from "react";
+import ListCard from "../components/ListCard/ListCard";
+import Loading from "../components/Loading/Loading";
 
 function List() {
     const [loading, setLoading] = useState(true);
@@ -29,15 +31,15 @@ function List() {
                 ]);
 
                 return {
-                    pokemon : pokemonRes,
-                    species : speciesRes
+                    pokemon: pokemonRes,
+                    species: speciesRes
                 }
             });
             const pokemonData = await Promise.all(promises);
 
             // 최종 데이터 세팅
             setList(pokemonData);
-            console.log(pokemonData);
+            console.log(pokemonData[0]);
         } catch (e) {
             console.error("데이터 수신 실패:", e);
         } finally {
@@ -50,11 +52,25 @@ function List() {
 
     return (
         <div>
-            {list.map(p =>
-                <p>{p.species.names[2].name}
-                   </p>
-            )}
+            {loading ? (
+                <Loading/>
+            ) : (
+                <div>
+                    {list.map(p =>
+                        <ListCard
+                            key={p.pokemon.id}
+                            id={p.pokemon.id}
+                            img={p.pokemon.sprites.front_default}
+                            name={p.species.names[2].name}
+                            types={p.pokemon.types.map(t => {
+                                const parts = t.type.url.split("/");
+                                return parts[parts.length - 2];
+                            })}
+                        />
+                    )}
+                </div>)}
         </div>
+
     )
 }
 
