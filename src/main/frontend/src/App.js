@@ -5,14 +5,17 @@ import {
 } from "react-router-dom";
 import './App.css';
 import List from "./routes/List";
-import {useEffect, useState} from "react";
-import axios from "axios";
+import Detail from "./routes/Detail";
+import Home from "./routes/Home";
+// import {useEffect, useState} from "react";
+// import axios from "axios";
 
 function App(){
   return <Router>
     <Routes>
+      <Route path="/detail/:id" element={<Detail />} />
       <Route path="/list" element={<List />} />
-      {/*<Route path={`${process.env.PUBLIC_URL}/`} element={<Home />}/>*/}
+      <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />}/>
     </Routes>
   </Router>
   // const [data, setData] = useState('');

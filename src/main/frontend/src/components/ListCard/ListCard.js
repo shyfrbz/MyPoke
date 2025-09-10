@@ -1,18 +1,20 @@
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import TypeBtn from "../TypeBtn/TypeBtn";
+import styles from "./ListCard.module.css";
 
-function ListCard({id, img, name, types}){
-    return <div>
+function ListCard({id, img, name, types}) {
+    return <div className={styles.card}>
         <Link to={`/detail/${id}`} style={{textDecoration: "none"}}>
-            <img src={img} alt={id}/>
+            <p>{id.toString().padStart(4,"0")}</p>
+            <img src={img} alt={id} className={styles.img}/>
             <p>{name}</p>
-            <div>
-                {types.map(i => (
-                    <TypeBtn key={i} id={i} />
-                ))}
-            </div>
         </Link>
+        <div>
+            {types.map(i => (
+                <TypeBtn key={i} id={i}/>
+            ))}
+        </div>
     </div>
 }
 

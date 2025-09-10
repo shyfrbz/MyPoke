@@ -1,0 +1,12 @@
+.img {
+    width:150px;
+}
+
+.card{
+    border-radius: 10px;
+    background-color: WhiteSmoke;
+    width:200px;
+    text-align: center;
+    padding:10px;
+    margin:10px;
+}

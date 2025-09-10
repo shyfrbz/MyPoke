@@ -39,7 +39,7 @@ function List() {
 
             // 최종 데이터 세팅
             setList(pokemonData);
-            console.log(pokemonData[0]);
+            // console.log(pokemonData[0]);
         } catch (e) {
             console.error("데이터 수신 실패:", e);
         } finally {
