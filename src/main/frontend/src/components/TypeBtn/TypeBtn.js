@@ -1,21 +1,14 @@
 import types from "../../data/types";
+import styles from "./TypeBtn.module.css";
 
 function TypeBtn({id}) {
     const typeData = types.find(t => t.id === Number(id));
 
     if (!typeData) return null;
 
-    return <span
+    return <span className={styles.typeBtn}
         style={{
-            backgroundColor: typeData.color.normal,
-            padding: "6px 20px",
-            margin: "3px",
-            borderRadius: "10px",
-            color: "white",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "4px",                 // 아이콘과 텍스트 간격
-            fontSize: "15px"
+            backgroundColor: typeData.color.normal
         }}>
     <typeData.logo width={13} height={13}/>
         {typeData.names.ko}

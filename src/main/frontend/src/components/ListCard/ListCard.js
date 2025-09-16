@@ -4,7 +4,8 @@ import TypeBtn from "../TypeBtn/TypeBtn";
 import styles from "./ListCard.module.css";
 
 function ListCard({id, img, name, types}) {
-    return <div className={styles.card}>
+    return (
+        <div className={styles.card}>
         <Link to={`/detail/${id}`} style={{textDecoration: "none"}}>
             <p>{id.toString().padStart(4,"0")}</p>
             <img src={img} alt={id} className={styles.img}/>
@@ -16,6 +17,7 @@ function ListCard({id, img, name, types}) {
             ))}
         </div>
     </div>
+    )
 }
 
 ListCard.propTypes = {
