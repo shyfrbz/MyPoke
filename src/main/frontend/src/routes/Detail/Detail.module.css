@@ -1,21 +1,27 @@
-/* 툴팁 내부 스타일 커스텀 */
-.tooltip-inner {
-    background-color: lightgray; /* 배경색 변경 */
-    color: black;           /* 글자색 변경 */
-    padding: 10px 15px;    /* 패딩 조절 */
-    font-size: 14px;        /* 글자 크기 조절 */
-    border-radius: 8px;     /* 모서리 둥글게 */
-}
-
-/* 화살표 색상 변경 */
-.tooltip.bs-tooltip-right .tooltip-arrow::before {
-    border-right-color: #333; /* 배경색과 맞추기 */
-}
-
 /* 이로치 버튼 */
-.shinyBtn{
+.shinyBtn {
     border-radius: 50%;
     border: none;
     background-color: #FFC91A;
     padding: 8px
+}
+
+/*특성*/
+.ablilty {
+    margin: 0 5px;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.ablilty svg {
+    margin-left: 3px;
+    width: 20px;
+    height: 20px;
+}
+
+.hiddenMark {
+    color: tomato;
+    margin-right: 2px;
+    /*font-size: 10px;*/
 }

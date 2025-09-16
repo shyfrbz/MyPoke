@@ -10,7 +10,7 @@ function TypeBtn({id}) {
         style={{
             backgroundColor: typeData.color.normal
         }}>
-    <typeData.logo width={13} height={13}/>
+    <typeData.logo width={14} height={14}/>
         {typeData.names.ko}
     </span>
 }

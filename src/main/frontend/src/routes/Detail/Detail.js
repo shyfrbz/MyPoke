@@ -57,7 +57,13 @@ function Detail() {
 
     // 보여줄 요소들 지정
     const pokemonName = info.species?.names?.find(n => n.language.name === "ko")?.name;
+    // const pokemonDesc = info.species?.flavor_text_entries.filter(n => n.language.name === "ko").pop()?.flavor_text;
+    const pokemonDesc = info.species?.flavor_text_entries?.find(n => n.language.name === "ko")?.flavor_text;
     const pokemonGenera = info.species?.genera?.find(g => g.language.name === "ko")?.genus;
+    const types= info.pokemon?.types?.map(t => {
+            const parts = t.type.url.split("/");
+            return parts[parts.length - 2];
+        })
 
     // 이로치 버튼
     const [shinyBtn, setShinyBtn] = useState(false);
@@ -89,16 +95,24 @@ function Detail() {
 
                             {/*오른쪽 정보 부분*/}
                             <div>
-                                <h4>{pokemonGenera}</h4>
-
                                 <div>
+                                    {types.map(i => (
+                                        <TypeBtn key={i} id={i}/>
+                                    ))}
+                                </div>
+                                <h4>{pokemonGenera}</h4>
+                                <p>{pokemonDesc}</p>
+                                <div>
+                                    신장 : {info.pokemon.height/10} m | 체중 : {info.pokemon.weight/10} kg
                                 </div>
 
-                                {info.abilities?.map((a, idx) => (<p>
-                                    <span>
+                                <div>
+                                    <h4>특성</h4>
+                                {info.abilities?.map((a, idx) => (
+                                    <div key={idx} className={styles.ablilty}>
                                         {info.pokemon.abilities[idx]?.is_hidden ?
-                                            <small style={{color: "tomato", marginRight: "2px"}}>*</small> : ""}
-                                        {a.names.filter(n => n.language.name === "ko").pop()?.name}</span>
+                                            <span className={styles.hiddenMark}>*</span> : ""}
+                                        {a.names.filter(n => n.language.name === "ko").pop()?.name}
                                         <OverlayTrigger
                                             key={idx}
                                             placement="right"
@@ -109,12 +123,11 @@ function Detail() {
                                                 </Tooltip>
                                             }
                                         >
-                                        <span style={{marginLeft: "3px", padding:"2px"}}>
-                                            <InfoIcon width={20} height={20} fill={"lightgray"}/>
-                                        </span>
+                                            <InfoIcon className={styles.infoIcon} fill={"lightgray"}/>
                                         </OverlayTrigger>
-                                    </p>
+                                    </div>
                                 ))}
+                                </div>
                             </div>
                         </div>
                     </main>

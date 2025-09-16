@@ -3,3 +3,18 @@
 body {
     font-family: 'Galmuri11', sans-serif;
 }
+/* 툴팁 내부 스타일 커스텀 */
+.tooltip-inner {
+    background-color: Gainsboro; /* 배경색 변경 */
+    color: black; /* 글자색 변경 */
+    padding: 10px 15px; /* 패딩 조절 */
+    font-size: 14px; /* 글자 크기 조절 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    font-family: 'Galmuri11', sans-serif;
+}
+
+/* 화살표 색상 변경 */
+.tooltip-arrow::before {
+    border-right-color: Gainsboro !important; /* 배경색과 맞추기 */
+}
+
