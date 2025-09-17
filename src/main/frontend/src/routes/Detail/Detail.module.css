@@ -6,6 +6,14 @@
     padding: 8px
 }
 
+/*울음소리 버튼*/
+.soundBtn{
+    border-radius: 50%;
+    border: none;
+    background-color: LightCoral;
+    padding: 8px
+}
+
 /*특성*/
 .ablilty {
     margin: 0 5px;

@@ -5,7 +5,9 @@ import {OverlayTrigger, Tooltip} from "react-bootstrap";
 import styles from "./Detail.module.css";
 import { ReactComponent as ShinyIcon } from "../../assets/icons/shiny.svg";
 import { ReactComponent as InfoIcon } from "../../assets/icons/info.svg";
+import { ReactComponent as SoundIcon } from "../../assets/icons/sound.svg";
 import TypeBtn from "../../components/TypeBtn/TypeBtn";
+import StatChart from "../../components/StatChart/StatChart";
 
 // import {Button} from "react-bootstrap";
 
@@ -71,6 +73,35 @@ function Detail() {
         setShinyBtn((prev) => !prev);
     }
 
+    // 울음소리 버튼
+
+    const cries = info.pokemon?.cries?.latest;
+    const audio = new Audio(cries);
+    // audio.src = cries;
+    audio.type = "audio/ogg";
+    audio.volume = 0.5;
+
+    const soundOn = () => {
+    // console.log(info.pokemon.cries.latest);
+        audio.play();
+    }
+
+    // 종족치 데이터
+    // 원하는 약어 매핑
+    const statMap = {
+        "hp": "H",
+        "attack": "A",
+        "defense": "B",
+        "special-attack": "C",
+        "special-defense": "D",
+        "speed": "S"
+    };
+
+    const statData = info.pokemon?.stats?.map(s => ({
+        stat: statMap[s.stat.name] || s.stat.name,
+        value : s.base_stat
+    })).reverse();
+
     return (
         <div>
             {loading ? (
@@ -91,6 +122,10 @@ function Detail() {
                                 <button onClick={onclick} className={styles.shinyBtn}>
                                    <ShinyIcon width={24.66} height={20} fill={"white"}/>
                                 </button>
+                                <button onClick={soundOn} className={styles.soundBtn}>
+                                   <SoundIcon width={24.66} height={20} fill={"white"}/>
+                                </button>
+                                {/*<audio src={info.pokemon.cries.latest} type="audio/ogg" id="criesAudio"></audio>*/}
                             </div>
 
                             {/*오른쪽 정보 부분*/}
@@ -128,6 +163,9 @@ function Detail() {
                                     </div>
                                 ))}
                                 </div>
+                                <h4>종족치</h4>
+                                <StatChart data={statData}/>
+
                             </div>
                         </div>
                     </main>
