@@ -41,7 +41,7 @@ function StatChart({data}) {
                     tickRotation: 0,
                     tickValues: [0, 50, 100, 150, 200, 255]
                 }}
-                margin={{top: 20, right: 20, bottom: 30, left: 20}}
+                margin={{top: 20, right: 30, bottom: 30, left: 20}}
                 layers={[
                     'grid',
                     'axes',

@@ -1,71 +1,31 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useParams} from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import {OverlayTrigger, Tooltip} from "react-bootstrap";
 import styles from "./Detail.module.css";
-import { ReactComponent as ShinyIcon } from "../../assets/icons/shiny.svg";
-import { ReactComponent as InfoIcon } from "../../assets/icons/info.svg";
-import { ReactComponent as SoundIcon } from "../../assets/icons/sound.svg";
+import {ReactComponent as ShinyIcon} from "../../assets/icons/shiny.svg";
+import {ReactComponent as InfoIcon} from "../../assets/icons/info.svg";
+import {ReactComponent as SoundIcon} from "../../assets/icons/sound.svg";
 import TypeBtn from "../../components/TypeBtn/TypeBtn";
 import StatChart from "../../components/StatChart/StatChart";
-
-// import {Button} from "react-bootstrap";
+import usePokemonDetail from "../../hooks/usePokemonDetail";
+import {getTypeIds} from "../../utils/pokemon";
+import useTypeCalc from "../../hooks/useTypeCalc";
 
 function Detail() {
     const {id} = useParams();
-    const [info, setInfo] = useState({
-        pokemon: {},
-        species: {names: []},
-        abilities: []
-    });
-    const [loading, setLoading] = useState(true);
-    const baseURL = "https://pokeapi.co/api/v2";
-    const getInfo = async () => {
-        try {
-            // 기본 정보 + 설명 가져오기
-            const [pokemonRes, speciesRes] = await Promise.all([
-                fetch(`${baseURL}/pokemon/${id}`)
-                    .then(res => res.json()),
-                fetch(`${baseURL}/pokemon-species/${id}`)
-                    .then(res => res.json())
-            ]);
-
-            // abilities에서 각 url 추출
-            const abilityUrls = pokemonRes.abilities.map(a => a.ability.url);
-
-            const abilityData = await Promise.all(
-                abilityUrls.map(url => fetch(url).then(res => res.json()))
-            );
-
-            const pokemonData = {
-                pokemon: pokemonRes,
-                species: speciesRes,
-                abilities: abilityData,
-            };
-
-            setInfo(pokemonData);
-            console.log(pokemonData);
-
-        } catch (e) {
-            console.error("데이터 수신 실패:", e);
-
-        } finally {
-            setLoading(false);
-        }
-    }
-    useEffect(() => {
-        getInfo();
-    }, []);
+    const {loading, info} = usePokemonDetail(id);
 
     // 보여줄 요소들 지정
     const pokemonName = info.species?.names?.find(n => n.language.name === "ko")?.name;
+    // 가장 최신 도감 설명
     // const pokemonDesc = info.species?.flavor_text_entries.filter(n => n.language.name === "ko").pop()?.flavor_text;
+    // 첫 도감 설명
     const pokemonDesc = info.species?.flavor_text_entries?.find(n => n.language.name === "ko")?.flavor_text;
     const pokemonGenera = info.species?.genera?.find(g => g.language.name === "ko")?.genus;
-    const types= info.pokemon?.types?.map(t => {
-            const parts = t.type.url.split("/");
-            return parts[parts.length - 2];
-        })
+    const types = getTypeIds(info.pokemon.types);
+
+    const {damage} = useTypeCalc(types);
 
     // 이로치 버튼
     const [shinyBtn, setShinyBtn] = useState(false);
@@ -74,20 +34,16 @@ function Detail() {
     }
 
     // 울음소리 버튼
-
     const cries = info.pokemon?.cries?.latest;
     const audio = new Audio(cries);
-    // audio.src = cries;
     audio.type = "audio/ogg";
     audio.volume = 0.5;
 
     const soundOn = () => {
-    // console.log(info.pokemon.cries.latest);
         audio.play();
     }
 
     // 종족치 데이터
-    // 원하는 약어 매핑
     const statMap = {
         "hp": "H",
         "attack": "A",
@@ -99,7 +55,7 @@ function Detail() {
 
     const statData = info.pokemon?.stats?.map(s => ({
         stat: statMap[s.stat.name] || s.stat.name,
-        value : s.base_stat
+        value: s.base_stat
     })).reverse();
 
     return (
@@ -120,10 +76,10 @@ function Detail() {
                                 )}
                                 <hr/>
                                 <button onClick={onclick} className={styles.shinyBtn}>
-                                   <ShinyIcon width={24.66} height={20} fill={"white"}/>
+                                    <ShinyIcon width={24.66} height={20} fill={"white"}/>
                                 </button>
                                 <button onClick={soundOn} className={styles.soundBtn}>
-                                   <SoundIcon width={24.66} height={20} fill={"white"}/>
+                                    <SoundIcon width={24.66} height={20} fill={"white"}/>
                                 </button>
                                 {/*<audio src={info.pokemon.cries.latest} type="audio/ogg" id="criesAudio"></audio>*/}
                             </div>
@@ -138,33 +94,53 @@ function Detail() {
                                 <h4>{pokemonGenera}</h4>
                                 <p>{pokemonDesc}</p>
                                 <div>
-                                    신장 : {info.pokemon.height/10} m | 체중 : {info.pokemon.weight/10} kg
+                                    신장 : {info.pokemon.height / 10} m | 체중 : {info.pokemon.weight / 10} kg
                                 </div>
 
                                 <div>
                                     <h4>특성</h4>
-                                {info.abilities?.map((a, idx) => (
-                                    <div key={idx} className={styles.ablilty}>
-                                        {info.pokemon.abilities[idx]?.is_hidden ?
-                                            <span className={styles.hiddenMark}>*</span> : ""}
-                                        {a.names.filter(n => n.language.name === "ko").pop()?.name}
-                                        <OverlayTrigger
-                                            key={idx}
-                                            placement="right"
-                                            delay={{show: 250, hide: 250}}
-                                            overlay={
-                                                <Tooltip id={`tooltip-right`}>
-                                                    {a.flavor_text_entries.filter(n => n.language.name === "ko").pop()?.flavor_text}
-                                                </Tooltip>
-                                            }
-                                        >
-                                            <InfoIcon className={styles.infoIcon} fill={"lightgray"}/>
-                                        </OverlayTrigger>
-                                    </div>
-                                ))}
+                                    {info.abilities?.map((a, idx) => (
+                                        <div key={idx} className={styles.ablilty}>
+                                            {info.pokemon.abilities[idx]?.is_hidden ?
+                                                <span className={styles.hiddenMark}>*</span> : ""}
+                                            {a.names.filter(n => n.language.name === "ko").pop()?.name}
+                                            <OverlayTrigger
+                                                key={idx}
+                                                placement="right"
+                                                delay={{show: 250, hide: 250}}
+                                                overlay={
+                                                    <Tooltip id={`tooltip-right`}>
+                                                        {a.flavor_text_entries.filter(n => n.language.name === "ko").pop()?.flavor_text}
+                                                    </Tooltip>
+                                                }
+                                            >
+                                                <InfoIcon className={styles.infoIcon} fill={"lightgray"}/>
+                                            </OverlayTrigger>
+                                        </div>
+                                    ))}
                                 </div>
                                 <h4>종족치</h4>
                                 <StatChart data={statData}/>
+
+                                <h4>방어상성(특성 미적용)</h4>
+                                <div>
+                                    <table className={styles.damageTable}>
+                                        <tbody>
+                                        {damage && Object.keys(damage)
+                                            .filter(key => damage[key].length > 0)
+                                            .sort((a, b) => Number(b) - Number(a))
+                                            .map(key => (
+                                                <tr key={key}>
+                                                    <td className={styles.tdKey}>{key}배</td>
+                                                    <td className={styles.tdVal}>
+                                                        {Array.isArray(damage[key]) && damage[key].map((item, index) =>
+                                                            <TypeBtn key={index} id={item}/>)}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
 
                             </div>
                         </div>

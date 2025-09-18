@@ -33,3 +33,20 @@
     margin-right: 2px;
     /*font-size: 10px;*/
 }
+
+/*방어상성 테이블*/
+.damageTable{
+    width:400px;
+    border: 1.5px solid dimgray;
+}
+.damageTable tr, .damageTable td{
+    border: 1.5px solid dimgray;
+
+}
+.tdKey{
+    width:20%;
+    text-align: center;
+}
+.tdVal{
+    width:80%;
+}
