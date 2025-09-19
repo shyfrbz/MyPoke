@@ -31,7 +31,7 @@ function useTypeCalc(ids){
         }
     }
 
-    return {damage};
+    return damage;
 }
 
 export default useTypeCalc;

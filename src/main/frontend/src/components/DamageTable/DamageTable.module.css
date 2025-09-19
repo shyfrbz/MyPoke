@@ -1,0 +1,15 @@
+.damageTable{
+    width:400px;
+    border: 1.5px solid dimgray;
+}
+.damageTable tr, .damageTable td{
+    border: 1.5px solid dimgray;
+
+}
+.tdKey{
+    width:20%;
+    text-align: center;
+}
+.tdVal{
+    width:80%;
+}

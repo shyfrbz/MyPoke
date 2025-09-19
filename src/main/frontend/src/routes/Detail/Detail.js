@@ -11,6 +11,7 @@ import StatChart from "../../components/StatChart/StatChart";
 import usePokemonDetail from "../../hooks/usePokemonDetail";
 import {getTypeIds} from "../../utils/pokemon";
 import useTypeCalc from "../../hooks/useTypeCalc";
+import DamageTable from "../../components/DamageTable/DamageTable";
 
 function Detail() {
     const {id} = useParams();
@@ -25,7 +26,7 @@ function Detail() {
     const pokemonGenera = info.species?.genera?.find(g => g.language.name === "ko")?.genus;
     const types = getTypeIds(info.pokemon.types);
 
-    const {damage} = useTypeCalc(types);
+    const damage = useTypeCalc(types);
 
     // 이로치 버튼
     const [shinyBtn, setShinyBtn] = useState(false);
@@ -123,24 +124,7 @@ function Detail() {
                                 <StatChart data={statData}/>
 
                                 <h4>방어상성(특성 미적용)</h4>
-                                <div>
-                                    <table className={styles.damageTable}>
-                                        <tbody>
-                                        {damage && Object.keys(damage)
-                                            .filter(key => damage[key].length > 0)
-                                            .sort((a, b) => Number(b) - Number(a))
-                                            .map(key => (
-                                                <tr key={key}>
-                                                    <td className={styles.tdKey}>{key}배</td>
-                                                    <td className={styles.tdVal}>
-                                                        {Array.isArray(damage[key]) && damage[key].map((item, index) =>
-                                                            <TypeBtn key={index} id={item}/>)}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <DamageTable damage={damage}/>
 
                             </div>
                         </div>
