@@ -1,0 +1,33 @@
+.evolution_wrapper{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.evolution_stage {
+    display:flex;
+    align-items: center;
+    max-width: 350px;
+}
+
+.pokemon_list {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.pokemon_card {
+    width: 80px; /* 카드 너비 */
+    text-align: center;
+}
+
+.pokemon-card.second_row {
+    margin-top: 12px; /* 2번째 줄과 간격 */
+}
+
+.arrow {
+    align-self: center;
+    margin: 0 8px;
+}

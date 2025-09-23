@@ -1,3 +1,11 @@
+/*성별 버튼*/
+.femaleBtn {
+    border-radius: 50%;
+    border: none;
+    background-color: #CEA6FF;
+    padding: 8px
+}
+
 /* 이로치 버튼 */
 .shinyBtn {
     border-radius: 50%;

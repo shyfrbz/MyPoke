@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BASE_URL, getPokemonData } from "../utils/pokemon";
+import { BASE_URL, getPokemonData, getIdFromUrl } from "../utils/pokemon";
 
 function usePokemonList() {
     const [loading, setLoading] = useState(true);
