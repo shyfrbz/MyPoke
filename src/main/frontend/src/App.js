@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import List from "./routes/List";
+import List from "./routes/List/List";
 import Detail from "./routes/Detail/Detail";
 import Home from "./routes/Home";
 // import {useEffect, useState} from "react";

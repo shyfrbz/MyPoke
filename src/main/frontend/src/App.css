@@ -1,7 +1,14 @@
 @import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
 
-body {
+body, #root, .wrapper {
     font-family: 'Galmuri11', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#root, .wrapper{
+    display: flex;
+    flex-direction: column;
 }
 /* 툴팁 내부 스타일 커스텀 */
 .tooltip-inner {

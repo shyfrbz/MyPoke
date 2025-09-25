@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import { getPokemonData, getIdFromUrl } from "../utils/pokemon";
 
 function usePokemonDetail(id){
@@ -9,7 +9,7 @@ function usePokemonDetail(id){
         evolution: []
     });
     const [loading, setLoading] = useState(true);
-    const getInfo = async () => {
+    const getInfo = useCallback(async () => {
         try {
             // 기본 정보 + 설명 가져오기
             const { pokemon, species } = await getPokemonData(id);
@@ -17,9 +17,13 @@ function usePokemonDetail(id){
             // 이미지 미리 로드
             const img1 = new Image();
             const img2 = new Image();
+            const img3 = new Image();
+            const img4 = new Image();
 
             img1.src = pokemon.sprites.other["official-artwork"].front_default;
             img2.src = pokemon.sprites.other["official-artwork"].front_shiny;
+            img3.src = pokemon.sprites.other["home"].front_default;
+            img4.src = pokemon.sprites.other["home"].front_shiny;
 
             // abilities에서 각 url 추출
             const abilityUrls = pokemon.abilities.map(a => a.ability.url);
@@ -70,10 +74,10 @@ function usePokemonDetail(id){
         } finally {
             setLoading(false);
         }
-    }
+    },[id]);
     useEffect(() => {
         getInfo();
-    }, [id]);
+    }, [getInfo]);
     return {loading, info}
 }
 

@@ -1,0 +1,18 @@
+.logo{
+    display: inline-flex;
+    font-weight: bold;
+    font-size: 25px;
+    letter-spacing: 1.3px;
+    color:white;
+    align-items: center;
+    gap:6px;
+    padding: 3px;
+}
+
+.navbar{
+    background-color: #cc322a;
+}
+
+.link {
+    color:white;
+}

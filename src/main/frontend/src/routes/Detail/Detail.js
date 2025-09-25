@@ -15,6 +15,8 @@ import {getTypeIds} from "../../utils/pokemon";
 import useTypeCalc from "../../hooks/useTypeCalc";
 import DamageTable from "../../components/DamageTable/DamageTable";
 import Evolution from "../../components/Evolution/Evolution";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 function Detail() {
     const {id} = useParams();
@@ -71,11 +73,12 @@ function Detail() {
 
 
     return (
-        <div>
+        <div className="wrapper">
             {loading ? (
                 <Loading/>
             ) : (
                 <div>
+                    <Header/>
                     <main>
                         <div className="d-flex">
                             {/*왼쪽 사진 부분*/}
@@ -158,6 +161,7 @@ function Detail() {
                             </div>
                         </div>
                     </main>
+                    <Footer/>
                 </div>)}
         </div>
 
