@@ -6,11 +6,16 @@ body, #root, .wrapper {
     margin: 0;
 }
 
-#root, .wrapper{
+#root, .wrapper {
     display: flex;
     flex-direction: column;
 }
+
 /* 툴팁 내부 스타일 커스텀 */
+.tooltip {
+    position: fixed !important;
+}
+
 .tooltip-inner {
     background-color: Gainsboro; /* 배경색 변경 */
     color: black; /* 글자색 변경 */
@@ -24,4 +29,3 @@ body, #root, .wrapper {
 .tooltip-arrow::before {
     border-right-color: Gainsboro !important; /* 배경색과 맞추기 */
 }
-

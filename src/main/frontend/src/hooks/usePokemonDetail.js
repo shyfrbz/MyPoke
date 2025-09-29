@@ -15,13 +15,13 @@ function usePokemonDetail(id){
             const { pokemon, species } = await getPokemonData(id);
 
             // 이미지 미리 로드
-            const img1 = new Image();
-            const img2 = new Image();
+            // const img1 = new Image();
+            // const img2 = new Image();
             const img3 = new Image();
             const img4 = new Image();
 
-            img1.src = pokemon.sprites.other["official-artwork"].front_default;
-            img2.src = pokemon.sprites.other["official-artwork"].front_shiny;
+            // img1.src = pokemon.sprites.other["official-artwork"].front_default;
+            // img2.src = pokemon.sprites.other["official-artwork"].front_shiny;
             img3.src = pokemon.sprites.other["home"].front_default;
             img4.src = pokemon.sprites.other["home"].front_shiny;
 

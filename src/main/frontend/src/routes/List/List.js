@@ -4,15 +4,42 @@ import usePokemonList from "../../hooks/usePokemonList";
 import {getTypeIds} from "../../utils/pokemon";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import {Container} from "react-bootstrap";
+import {Container, Spinner} from "react-bootstrap";
 import styles from "./List.module.css"
+import {useEffect, useRef} from "react";
 
 function List() {
-    const {loading, list} = usePokemonList();
+    const {loading, list, hasMore, getMore} = usePokemonList();
+    const ref = useRef();
+
+    useEffect(() => {
+        if (!ref.current) return;
+
+        // 옵저버 옵션. 각각 무엇을 기준으로, 어느 위치에서, 얼마만큼 보일때 실행할건지 설정한다.
+        const options = {root: null, rootMargin: "100px", threshold: 0};
+
+        // 옵저버가 관찰 대상이 시야에 들어왔을 때 실행하는 함수.
+        // 관찰하는 요소들의 배열인 entries와 observer 객체를 받음
+        // 여기서는 관찰자가 하나이므로 아래와 같이 사용
+        const callback = ([entry]) => {
+            if (entry.isIntersecting && !loading && hasMore) {
+                getMore();
+            }
+        };
+
+        const observer = new IntersectionObserver(callback, options);
+
+        const currentRef = ref.current; // cleanup 함수에서 참조할 수 있도록 변수에 할당
+        if (currentRef) observer.observe(currentRef); // 관찰 시작
+
+        // cleanup: 컴포넌트 언마운트 시 옵저버 해제
+        return () => observer.disconnect();
+
+    }, [getMore, loading, hasMore]);
 
     return (
         <div className="wrapper">
-            {loading ? (
+            {loading && list.length === 0 ? (
                 <Loading/>
             ) : (
                 <div>
@@ -29,6 +56,16 @@ function List() {
                                 />
                             )}
                         </Container>
+                        {/* ✨ 4. 로딩 중일 때 스피너 표시 (기존과 동일하지만, hasMore가 false가 되면 더 이상 실행되지 않음) */}
+                        {loading && <div style={{ textAlign: 'center', margin:"50px 0" }}>
+                            <Spinner animation="border" variant="danger" />
+                        </div>}
+
+                        {/* ✨ 5. 더 가져올 데이터가 있을 때만 관찰 대상을 렌더링 */}
+                        {hasMore && !loading && <div ref={ref} style={{ height: '50px' }} />}
+
+                        {/* ✨ (선택사항) 모든 데이터 로드 후 메시지 표시 */}
+                        {!hasMore && <div style={{ textAlign: 'center', padding: '20px' }}>모든 포켓몬을 다 보셨습니다!</div>}
                     </main>
                     <Footer/>
                 </div>)}

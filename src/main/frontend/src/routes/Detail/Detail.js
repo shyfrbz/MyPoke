@@ -71,6 +71,7 @@ function Detail() {
         value: s.base_stat
     })).reverse();
 
+    const allStat = statData?.reduce((sum, s) => sum + s.value, 0);
 
     return (
         <div className="wrapper">
@@ -143,6 +144,20 @@ function Detail() {
                                                         {a.flavor_text_entries.filter(n => n.language.name === "ko").pop()?.flavor_text}
                                                     </Tooltip>
                                                 }
+                                                popperConfig={{
+                                                    strategy: 'fixed',
+                                                    modifiers: [
+                                                        {name: 'computeStyles', options: {adaptive: false}},
+                                                        {
+                                                            name: 'preventOverflow',
+                                                            options: {boundary: 'viewport', padding: 8}
+                                                        },
+                                                        {
+                                                            name: 'flip',
+                                                            options: {fallbackPlacements: ['left', 'top', 'bottom']}
+                                                        },
+                                                    ],
+                                                }}
                                             >
                                                 <InfoIcon className={styles.infoIcon} fill={"lightgray"}/>
                                             </OverlayTrigger>
@@ -155,7 +170,7 @@ function Detail() {
                                 <h4>방어상성(특성 미적용)</h4>
                                 <DamageTable damage={damage}/>
 
-                                <h4>종족치</h4>
+                                <h4>종족치({allStat})</h4>
                                 <StatChart data={statData}/>
 
                             </div>
