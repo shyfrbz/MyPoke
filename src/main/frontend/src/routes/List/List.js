@@ -6,12 +6,44 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import {Container, Spinner} from "react-bootstrap";
 import styles from "./List.module.css"
-import {useEffect, useRef} from "react";
+import {useEffect, useLayoutEffect, useRef} from "react";
 
 function List() {
     const {loading, list, hasMore, getMore} = usePokemonList();
     const ref = useRef();
+    const SCROLL_POSITION_KEY = 'listScrollPosition';
+    const listWrapperRef = useRef(null);
 
+    // ✨ 2. 스크롤 복원 로직을 useEffect 대신 useLayoutEffect로 변경합니다.
+    useLayoutEffect(() => {
+        const savedPosition = sessionStorage.getItem(SCROLL_POSITION_KEY);
+        const wrapper = listWrapperRef.current;
+
+        if (savedPosition && list.length > 0 && wrapper) {
+            // 1. 렌더링을 막기 위해 화면을 즉시 투명하게 만듭니다.
+            wrapper.style.opacity = '0';
+
+            // 2. 스크롤을 즉시 이동시킵니다.
+            window.scrollTo(0, parseInt(savedPosition, 10));
+            sessionStorage.removeItem(SCROLL_POSITION_KEY);
+
+            // 3. 브라우저의 다음 페인트 프레임에서 화면을 다시 보이게 합니다.
+            //    이것이 스크롤 점프를 숨기는 핵심입니다.
+            requestAnimationFrame(() => {
+                wrapper.style.opacity = '1';
+            });
+        }
+    }, [list.length]); // 의존성 배열과 내부 로직은 동일합니다.
+
+    // 스크롤 위치 저장
+    useEffect(() => {
+        // useEffect의 cleanup 함수를 이용합니다. 이 함수는 컴포넌트가 언마운트되기 직전에 호출됩니다.
+        return () => {
+            sessionStorage.setItem(SCROLL_POSITION_KEY, window.scrollY);
+        };
+    }, []); // 의존성 배열이 비어있으므로, 마운트 시에 딱 한 번만 등록되고 언마운트 시에 실행됩니다.
+
+    // 무한스크롤 설정
     useEffect(() => {
         if (!ref.current) return;
 
@@ -48,24 +80,26 @@ function List() {
                         <Container className={styles.list}>
                             {list.map(p =>
                                 <ListCard
-                                    key={p.pokemon.id}
-                                    id={p.pokemon.id}
-                                    img={p.pokemon.sprites.front_default}
-                                    name={p.species.names[2].name}
-                                    types={getTypeIds(p.pokemon.types)}
+                                    // key={p.pokemon.id}
+                                    // id={p.pokemon.id}
+                                    // img={p.pokemon.sprites.front_default}
+                                    // name={p.species.names?.find(n => n.language.name === "ko")?.name}
+                                    // types={getTypeIds(p.pokemon.types)}
+                                    key={p.id}
+                                    id={p.id}
+                                    img={p.img}
+                                    name={p.name}
+                                    types={getTypeIds(p.types)}
                                 />
                             )}
                         </Container>
-                        {/* ✨ 4. 로딩 중일 때 스피너 표시 (기존과 동일하지만, hasMore가 false가 되면 더 이상 실행되지 않음) */}
+                        {/* 로딩 중일 때 스피너 표시 (기존과 동일하지만, hasMore가 false가 되면 더 이상 실행되지 않음) */}
                         {loading && <div style={{ textAlign: 'center', margin:"50px 0" }}>
                             <Spinner animation="border" variant="danger" />
                         </div>}
 
-                        {/* ✨ 5. 더 가져올 데이터가 있을 때만 관찰 대상을 렌더링 */}
+                        {/* 더 가져올 데이터가 있을 때만 관찰 대상을 렌더링 */}
                         {hasMore && !loading && <div ref={ref} style={{ height: '50px' }} />}
-
-                        {/* ✨ (선택사항) 모든 데이터 로드 후 메시지 표시 */}
-                        {!hasMore && <div style={{ textAlign: 'center', padding: '20px' }}>모든 포켓몬을 다 보셨습니다!</div>}
                     </main>
                     <Footer/>
                 </div>)}

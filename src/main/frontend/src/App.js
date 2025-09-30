@@ -1,33 +1,24 @@
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route
+    BrowserRouter as Router,
+    Routes,
+    Route,
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import List from "./routes/List/List";
 import Detail from "./routes/Detail/Detail";
 import Home from "./routes/Home";
-// import {useEffect, useState} from "react";
-// import axios from "axios";
 
-function App(){
-  return <Router>
-    <Routes>
-      <Route path="/detail/:id" element={<Detail />} />
-      <Route path="/list" element={<List />} />
-      <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />}/>
-    </Routes>
-  </Router>
-  // const [data, setData] = useState('');
-  //
-  // useEffect(()=>{
-  //   axios.get("http://localhost:8090/test")
-  //       .then(res => setData(res.data))
-  //       .catch(err => console.log("error : " + err))
-  // })
-  //
-  // return data;
+function App() {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/detail/:id" element={<Detail/>}/>
+                <Route path="/list" element={<List/>}/>
+                <Route path={`${process.env.PUBLIC_URL}/`} element={<Home/>}/>
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;

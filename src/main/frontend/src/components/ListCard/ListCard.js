@@ -6,7 +6,8 @@ import styles from "./ListCard.module.css";
 function ListCard({id, img, name, types}) {
     return (
         <div className={styles.card}>
-        <Link to={`/detail/${id}`} className="text-dark text-decoration-none">
+        <Link to={`/detail/${id}`}
+              className="text-dark text-decoration-none">
             <p>{id.toString().padStart(4,"0")}</p>
             <img src={img} alt={id} className={styles.img}/>
             <p>{name}</p>
