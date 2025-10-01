@@ -1,43 +1,23 @@
-import {useEffect, useState, useCallback, useRef} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {BASE_URL, getPokemonData} from "../utils/pokemon";
 
-const POKEMON_STATE_KEY = 'pokemonListState';
-
 function usePokemonList() {
-    const [list, setList] = useState(() => {
-        const savedState = sessionStorage.getItem(POKEMON_STATE_KEY);
-        return savedState ? JSON.parse(savedState).list : [];
-    });
-    const [hasMore, setHasMore] = useState(() => {
-        const savedState = sessionStorage.getItem(POKEMON_STATE_KEY);
-        return savedState ? JSON.parse(savedState).hasMore : true;
-    });
-    const [offset, setOffset] = useState(() => {
-        const savedState = sessionStorage.getItem(POKEMON_STATE_KEY);
-        return savedState ? JSON.parse(savedState).offset : 0;
-    });
-
+    const [list, setList] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+    const [offset, setOffset] = useState(0);
     const [loading, setLoading] = useState(false);
-    const isLoading = useRef(false);
     const limit = 20;
     const MAX_POKEMON_ID = 9999;
 
-    // list, offset, hasMore 상태가 바뀔 때마다 자동으로 sessionStorage에 저장
-    useEffect(() => {
-        try {
-            const stateToSave = { list, offset, hasMore };
-            sessionStorage.setItem(POKEMON_STATE_KEY, JSON.stringify(stateToSave));
-        } catch (e) {
-            if (e.name === 'QuotaExceededError') {
-                console.error("세션 스토리지 용량을 초과했습니다. 저장 로직을 다시 확인해주세요.");
-            }
-        }
-    }, [list, offset, hasMore]);
+    // 데이터 요청 중복을 막기 위한 Ref
+    const isLoading = useRef(false);
 
     // List.js의 useEffect가 매번 실행되지 않도록 useCallback 사용
     const getList = useCallback(async (next = false) => {
-        if (isLoading.current || (next && !hasMore)) return; // 중복 호출 방지
-        isLoading.current = true;
+        // state 대신 ref를 확인하여 중복 호출을 즉시 방지
+        if (isLoading.current || (next && !hasMore)) return;
+
+        isLoading.current = true; // 요청 시작 시 동기적으로 true로 설정
         setLoading(true);
 
         try {
@@ -46,12 +26,6 @@ function usePokemonList() {
 
             const response = await fetch(`${BASE_URL}/pokemon?limit=${limit}&offset=${currentOffset}`);
             const json = await response.json();
-
-            // API 응답이 없으면 중단
-            if (!json.results || json.results.length === 0) {
-                setHasMore(false);
-                return;
-            }
 
             const filteredIds = json.results.reduce((a, pokemon) => {
                 const parts = pokemon.url.split('/');
@@ -62,7 +36,7 @@ function usePokemonList() {
                 return a;
             }, []);
 
-            if (filteredIds.length < json.results.length || json.next === null) {
+            if (filteredIds.length < json.results.length || json.next === null || !json.results) {
                 setHasMore(false);
             }
 
@@ -86,14 +60,18 @@ function usePokemonList() {
             // next가 false이면 처음 가져온 값이므로 그대로 세팅
             setList(prev => next ? [...prev, ...simpleData] : simpleData);
 
-            if (next) setOffset(prev => prev + limit);
-            else setOffset(limit);
+            if (next) {
+                setOffset(prevOffset => prevOffset + limit);
+            } else {
+                setOffset(limit);
+            }
 
         } catch (e) {
             console.error("데이터 수신 실패:", e);
         } finally {
-            setLoading(false);
+            // 요청이 성공하든 실패하든 항상 false로 설정
             isLoading.current = false;
+            setLoading(false);
         }
     },[offset, hasMore]);
 
