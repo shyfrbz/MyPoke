@@ -5,7 +5,7 @@ import {ReactComponent as PokeballIcon} from "../../assets/icons/pokeball.svg";
 function Header() {
     return (
         <header>
-            <Navbar key="md" expand="md" data-bs-theme="dark" className={styles.navbar}>
+            <Navbar key="md" expand="md" data-bs-theme="dark" fixed="top" className={styles.navbar}>
                 <Container>
                     <Navbar.Brand href="/" className={styles.logo}>
                         <PokeballIcon width={32} height={32}/>

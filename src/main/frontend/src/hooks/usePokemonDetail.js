@@ -26,10 +26,10 @@ function usePokemonDetail(id){
             img4.src = pokemon.sprites.other["home"].front_shiny;
 
             // abilities에서 각 url 추출
-            const abilityUrls = pokemon.abilities.map(a => a.ability.url);
+            const abilityUrls = pokemon.abilities?.map(a => a.ability.url);
 
             const abilityData = await Promise.all(
-                abilityUrls.map(url => fetch(url).then(res => res.json()))
+                abilityUrls?.map(url => fetch(url).then(res => res.json()))
             );
 
             // 진화정보 추출

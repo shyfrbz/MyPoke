@@ -1,12 +1,10 @@
 import ListCard from "../../components/ListCard/ListCard";
-import Loading from "../../components/Loading/Loading";
 import usePokemonList from "../../hooks/usePokemonList";
 import {getTypeIds} from "../../utils/pokemon";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import {Container, Spinner} from "react-bootstrap";
 import styles from "./List.module.css"
 import {useEffect, useRef} from "react";
+import Layout from "../../components/Layout";
 
 function List() {
     const {loading, list, hasMore, getMore} = usePokemonList();
@@ -36,44 +34,34 @@ function List() {
         // cleanup: 컴포넌트 언마운트 시 옵저버 해제
         return () => observer.disconnect();
 
-    }, [getMore, loading, hasMore]);
+    }, [getMore, loading, hasMore, list]);
 
     return (
-        <div className="wrapper">
-            {loading && list.length === 0 ? (
-                <Loading/>
-            ) : (
-                <div>
-                    <Header/>
-                    <main>
-                        <Container className={styles.list}>
-                            {list.map(p =>
-                                <ListCard
-                                    // key={p.pokemon.id}
-                                    // id={p.pokemon.id}
-                                    // img={p.pokemon.sprites.front_default}
-                                    // name={p.species.names?.find(n => n.language.name === "ko")?.name}
-                                    // types={getTypeIds(p.pokemon.types)}
-                                    key={p.id}
-                                    id={p.id}
-                                    img={p.img}
-                                    name={p.name}
-                                    types={getTypeIds(p.types)}
-                                />
-                            )}
-                        </Container>
-                        {/* 로딩 중일 때 스피너 표시 (기존과 동일하지만, hasMore가 false가 되면 더 이상 실행되지 않음) */}
-                        {loading && <div style={{ textAlign: 'center', margin:"50px 0" }}>
-                            <Spinner animation="border" variant="danger" />
-                        </div>}
+        <Layout loading={loading && list.length === 0}>
+            <Container className={styles.list}>
+                {list?.map(p =>
+                    <ListCard
+                        // key={p.pokemon.id}
+                        // id={p.pokemon.id}
+                        // img={p.pokemon.sprites.front_default}
+                        // name={p.species.names?.find(n => n.language.name === "ko")?.name}
+                        // types={getTypeIds(p.pokemon.types)}
+                        key={p.id}
+                        id={p.id}
+                        img={p.img}
+                        name={p.name}
+                        types={getTypeIds(p.types)}
+                    />
+                )}
+            </Container>
+            {/* 로딩 중일 때 스피너 표시 (기존과 동일하지만, hasMore가 false가 되면 더 이상 실행되지 않음) */}
+            {loading && <div style={{textAlign: 'center', margin: "50px 0"}}>
+                <Spinner animation="border" variant="danger"/>
+            </div>}
 
-                        {/* 더 가져올 데이터가 있을 때만 관찰 대상을 렌더링 */}
-                        {hasMore && !loading && <div ref={ref} style={{ height: '50px' }} />}
-                    </main>
-                    <Footer/>
-                </div>)}
-        </div>
-
+            {/* 더 가져올 데이터가 있을 때만 관찰 대상을 렌더링 */}
+            {hasMore && !loading && <div ref={ref} style={{height: '50px'}}/>}
+        </Layout>
     )
 }
 
