@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useRef, useState} from "react";
-import {BASE_URL, getPokemonData} from "../utils/pokemon";
+import {BASE_URL, getPokemonData, getTypeIds} from "../utils/pokemon";
 
 function usePokemonList() {
     const [list, setList] = useState([]);
@@ -55,6 +55,25 @@ function usePokemonList() {
                     types: p.pokemon.types
                 }
             })
+
+            // 데이터 저장용
+            // const forSearch = pokemonData?.map(p => {
+            //     return{
+            //         id:p.pokemon.id,
+            //         names : {
+            //             en : p.species.name,
+            //             ko : p.species.names?.find(n => n.language.name === 'ko')?.name,
+            //             ja : p.species.names?.find(n => n.language.name === 'ja')?.name
+            //         },
+            //         img : {
+            //             default : p.pokemon.sprites?.front_default,
+            //             official : p.pokemon.sprites.other["official-artwork"].front_default
+            //         },
+            //         types : getTypeIds(p.pokemon.types)
+            //     }
+            // })
+            //
+            // console.log(forSearch)
 
             // next가 true이면 기존 값에 추가로 받아온 값 세팅
             // next가 false이면 처음 가져온 값이므로 그대로 세팅

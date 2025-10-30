@@ -5,6 +5,8 @@ import {Container, Spinner} from "react-bootstrap";
 import styles from "./List.module.css"
 import {useEffect, useRef} from "react";
 import Layout from "../../components/Layout";
+import Search from "../../components/Search/Search";
+import AllTypes from "../../components/AllTypes/AllTypes";
 
 function List() {
     const {loading, list, hasMore, getMore} = usePokemonList();
@@ -14,12 +16,12 @@ function List() {
     useEffect(() => {
         if (!ref.current) return;
 
-        // 옵저버 옵션. 각각 무엇을 기준으로, 어느 위치에서, 얼마만큼 보일때 실행할건지 설정한다.
+        // 감시자 옵션. 각각 무엇을 기준으로, 어느 위치에서, 얼마만큼 보일때 실행할건지 설정한다.
         const options = {root: null, rootMargin: "100px", threshold: 0};
 
-        // 옵저버가 관찰 대상이 시야에 들어왔을 때 실행하는 함수.
-        // 관찰하는 요소들의 배열인 entries와 observer 객체를 받음
-        // 여기서는 관찰자가 하나이므로 아래와 같이 사용
+        // 감시자가 감시 대상이 시야에 들어왔을 때 실행하는 함수.
+        // 감시하는 요소들의 배열인 entries와 observer 객체를 받음
+        // 여기서는 감시자가 하나이므로 아래와 같이 사용
         const callback = ([entry]) => {
             if (entry.isIntersecting && !loading && hasMore) {
                 getMore();
@@ -28,10 +30,10 @@ function List() {
 
         const observer = new IntersectionObserver(callback, options);
 
-        const currentRef = ref.current; // cleanup 함수에서 참조할 수 있도록 변수에 할당
-        if (currentRef) observer.observe(currentRef); // 관찰 시작
+        const currentRef = ref.current; // disconnect 실행 시 ref.current 값이 바뀌어도 사용 가능하도록 변수 할당
+        if (currentRef) observer.observe(currentRef); //감시 시작
 
-        // cleanup: 컴포넌트 언마운트 시 옵저버 해제
+        // 컴포넌트 언마운트 시 감시자 해제
         return () => observer.disconnect();
 
     }, [getMore, loading, hasMore, list]);
@@ -39,6 +41,8 @@ function List() {
     return (
         <Layout loading={loading && list.length === 0}>
             <Container className={styles.list}>
+                <Search/>
+                <AllTypes/>
                 {list?.map(p =>
                     <ListCard
                         // key={p.pokemon.id}
@@ -54,7 +58,7 @@ function List() {
                     />
                 )}
             </Container>
-            {/* 로딩 중일 때 스피너 표시 (기존과 동일하지만, hasMore가 false가 되면 더 이상 실행되지 않음) */}
+            {/* 로딩 중일 때 스피너 표시 */}
             {loading && <div style={{textAlign: 'center', margin: "50px 0"}}>
                 <Spinner animation="border" variant="danger"/>
             </div>}

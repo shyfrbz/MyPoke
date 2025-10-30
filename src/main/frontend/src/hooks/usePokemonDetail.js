@@ -36,8 +36,6 @@ function usePokemonDetail(id){
             const response = await fetch(species.evolution_chain.url);
             const evolution = await response.json();
 
-            console.log(evolution)
-
             const firstId = [getIdFromUrl(evolution.chain.species.url)];
 
             const secondId = evolution.chain.evolves_to?.map(e => {
@@ -63,8 +61,6 @@ function usePokemonDetail(id){
                     { ids: thirdId, data: thirdData }
                 ]
             };
-
-            console.log(pokemonData);
 
             setInfo(pokemonData);
 

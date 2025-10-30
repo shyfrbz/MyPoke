@@ -1,4 +1,5 @@
 // URL에서 마지막 앞 숫자(id) 추출
+
 export const getIdFromUrl = (url) => {
     const parts = url.split('/');
     return parts[parts.length - 2];
