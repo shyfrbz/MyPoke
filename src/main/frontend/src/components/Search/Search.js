@@ -54,6 +54,7 @@ function Search() {
         if (!q) return; // 빈값이면 실행하지 않음
         setHasKeyword(false); // 자동완성 닫기
         navigate(`/search/${q}`);
+        setKeyword('')
     };
 
     // 자동완성 목록 중 키보드로 선택
