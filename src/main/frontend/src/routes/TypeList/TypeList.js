@@ -8,10 +8,12 @@ import {useParams} from "react-router-dom";
 import AllTypes from "../../components/AllTypes/AllTypes";
 import types from "../../data/types";
 import Search from "../../components/Search/Search";
+import {useTranslation} from "react-i18next";
 
 function TypeList() {
     const {id} = useParams();
     const {loading, typeList} = useTypeList(id);
+    const { t } = useTranslation();
 
     const typeData = types.find(t => t.id === Number(id));
     if (!typeData) return null;
@@ -20,7 +22,7 @@ function TypeList() {
         <Layout loading={loading && typeList.length === 0}>
             <Container className={styles.list}>
                 <h3 className={styles.title} style={{backgroundColor:typeData.color.bright}}>
-                    {typeData.names.ko} 타입
+                    {typeData.names[t('lang')]} {t('search.type')}
                 </h3>
                 <Search/>
                 <AllTypes/>

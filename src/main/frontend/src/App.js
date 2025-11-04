@@ -7,9 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import List from "./routes/List/List";
 import Detail from "./routes/Detail/Detail";
-import Home from "./routes/Home";
+import Home from "./routes/Home/Home";
 import TypeList from "./routes/TypeList/TypeList";
 import SearchList from "./routes/SearchList/SearchList";
+import "./i18n";
 
 function App() {
     return (

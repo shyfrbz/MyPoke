@@ -1,7 +1,8 @@
 import styles from "./Search.module.css"
 import {useEffect, useState} from "react";
 import allPokemonData from "../../data/allPokemonData";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 function Search() {
     const [keyword, setKeyword] = useState('');                 // 검색어
@@ -10,27 +11,45 @@ function Search() {
     const [dropdownIdx, setDropdownIdx] = useState(-1);       // 드롭다운 리스트 중 선택된 인덱스
 
     const navigate = useNavigate();
+    const {i18n} = useTranslation();
+    const lang = i18n.language.slice(0, 2);
+
+    // 히라가나 → 가타카나 변환 함수
+    const toKatakana = (str) => {
+        return str.replace(/[\u3041-\u3096]/g, ch =>
+            String.fromCharCode(ch.charCodeAt(0) + 0x60)
+        );
+    };
+
+    // // 가타카나 → 히라가나 변환 함수
+    // const toHiragana = (str) => {
+    //     return str.replace(/[\u30A1-\u30F6]/g, ch =>
+    //         String.fromCharCode(ch.charCodeAt(0) - 0x60)
+    //     );
+    // };
 
     // 자동완성 드롭다운 목록 출력
     const showDropdown = () => {
-        if (!keyword.trim()) {
+        let q = keyword.toLowerCase().trim();
+
+        if (!q) {
             setHasKeyword(false);
             setDropdown([]);
             return;
         }
 
-        const q = keyword.toLowerCase();
+        const filteredList = allPokemonData.filter(p => {
+                let name = (p.names?.[lang]).toLowerCase();
 
-        const filteredList = allPokemonData.filter(p =>
-            (p.names?.ko ?? "").toLowerCase().includes(q)
+                // 일본어일 경우, 이름을 히라가나로 변환해서 비교
+                if (lang === "ja") {
+                    q = toKatakana(q);
+                }
+
+                const idMatch = p.id.toString().includes(q);
+                return name.includes(q) || idMatch;
+            }
         ).slice(0, 7);
-
-        // 추후 언어변경 시 이렇게
-        // const filteredList = allPokemonData.filter(p =>
-        //     ["ko","en","ja"].some(lang =>
-        //         (p.name?.[lang] ?? "").toLowerCase().includes(q)
-        //     )
-        // );
 
         setDropdown(filteredList);
         setHasKeyword(true);
@@ -44,9 +63,9 @@ function Search() {
 
     // 자동완성 목록 중 하나 클릭 시
     const clickDropdown = clickedItem => {
-        setKeyword(clickedItem.names.ko);
+        setKeyword(clickedItem.names[lang]);
         setHasKeyword(false);
-        navigate(`/search/${clickedItem.names.ko}`);
+        navigate(`/search/${clickedItem.names[lang]}`);
     }
 
     const handleSearch = (searchTerm = keyword) => {
@@ -59,14 +78,14 @@ function Search() {
 
     // 자동완성 목록 중 키보드로 선택
     const handleDropdownKey = event => {
-        if (hasKeyword){
+        if (hasKeyword) {
             // 아래 키 누르기 + 목록의 길이가 선택된 인덱스보다 클 때
             if (event.key === 'ArrowDown' && dropdown.length - 1 > dropdownIdx) {
                 setDropdownIdx(dropdownIdx + 1);
             }
 
             // 위 키 누르기 + 선택된 인덱스가 0보다 크거나 같을 때
-            if (event.key === 'ArrowUp' && dropdownIdx >= 0){
+            if (event.key === 'ArrowUp' && dropdownIdx >= 0) {
                 setDropdownIdx(dropdownIdx - 1);
             }
 
@@ -74,8 +93,8 @@ function Search() {
             if (event.key === "Enter") {
                 if (dropdownIdx >= 0) {
                     const selected = dropdown[dropdownIdx];
-                    setKeyword(selected.names.ko);
-                    handleSearch(selected.names.ko);
+                    setKeyword(selected.names[lang]);
+                    handleSearch(selected.names[lang]);
                 } else {
                     handleSearch();
                 }
@@ -105,9 +124,6 @@ function Search() {
             </span>
             {hasKeyword && (
                 <ul>
-                    {dropdown.length === 0 && (
-                        <li>일치하는 포켓몬 이름이 없습니다.</li>
-                    )}
                     {dropdown.map((item, idx) => {
                         return (
                             <li key={idx}
@@ -115,7 +131,7 @@ function Search() {
                                 onClick={() => clickDropdown(item)}
                                 onMouseOver={() => setDropdownIdx(idx)}
                             >
-                                {item.names.ko}
+                                #{item.id.toString().padStart(4,"0")}&ensp;{item.names[lang]}<img src={item.img.default} alt={item.names[lang]} width="45px"/>
                             </li>
                         )
                     })}

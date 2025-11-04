@@ -1,0 +1,21 @@
+{
+  "lang" : "ko",
+  "nav" : {
+    "pokedex" : "도감",
+    "quiz" : "퀴즈",
+    "language" : "한국어"
+  },
+  "search" : {
+    "type" : "타입",
+    "result" : "검색결과"
+  },
+  "detail" : {
+    "height" : "신장",
+    "weight" : "체중",
+    "abilities" : "특성",
+    "evolutions" : "진화정보",
+    "notEvolve" : "진화하지 않는 포켓몬입니다.",
+    "effectiveness" : "방어상성(특성 미적용)",
+    "stats" : "종족치"
+  }
+}

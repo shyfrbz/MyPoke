@@ -2,12 +2,16 @@ import PropTypes from "prop-types";
 import {ReactComponent as RightIcon} from "../../assets/icons/chevron-right.svg";
 import styles from "./Evolution.module.css"
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 function Evolution({evolution}) {
     const hasEvolution = evolution.slice(1).some(stage => stage.data.length > 0);
 
+    const { i18n, t} = useTranslation();
+    const lang = i18n.language.slice(0, 2);
+
     if (!hasEvolution) {
-        return <p>진화하지 않는 포켓몬입니다.</p>;
+        return <p>{t('detail.notEvolve')}</p>;
     }
 
     return (
@@ -19,7 +23,7 @@ function Evolution({evolution}) {
                             <Link to={`/detail/${p.pokemon.id}`} key={p.pokemon.id} className="text-dark text-decoration-none">
                             <div className={`pokemon_card ${idx >= 3 ? styles.second_row : ""}`}>
                                 <img src={p.pokemon.sprites.front_default} alt={p.pokemon.name}/>
-                                <p>{p.species.names.find(n => n.language.name === 'ko')?.name || p.pokemon.name}</p>
+                                <p>{p.species.names.find(n => n.language.name === lang)?.name || p.pokemon.name}</p>
                             </div>
                             </Link>
                         ))}

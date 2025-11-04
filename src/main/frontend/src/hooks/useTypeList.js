@@ -31,7 +31,7 @@ function useTypeList(typeId) {
                 return {
                     id: p.pokemon.id,
                     img: p.pokemon.sprites?.front_default,
-                    name: p.species.names?.find(n => n.language.name === 'ko')?.name,
+                    name: p.species.names,
                     types: p.pokemon.types
                 }
             })

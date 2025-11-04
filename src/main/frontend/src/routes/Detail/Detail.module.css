@@ -1,3 +1,9 @@
+.wrapper{
+    display: flex;
+    margin-top: 80px;
+}
+
+
 /*성별 버튼*/
 .femaleBtn {
     border-radius: 50%;

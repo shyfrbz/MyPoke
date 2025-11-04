@@ -1,0 +1,21 @@
+{
+  "lang" : "en",
+  "nav" : {
+    "pokedex" : "Pokédex",
+    "quiz" : "Quiz",
+    "language" : "English"
+  },
+  "search" : {
+    "type" : "Type",
+    "result" : "Search results for"
+  },
+  "detail" : {
+    "height" : "Height",
+    "weight" : "Weight",
+    "abilities" : "Abilities",
+    "evolutions" : "Evolutions",
+    "notEvolve" : "This Pokémon does not evolve.",
+    "effectiveness" : "Type Effectiveness(Ability not applied)",
+    "stats" : "Stats"
+  }
+}

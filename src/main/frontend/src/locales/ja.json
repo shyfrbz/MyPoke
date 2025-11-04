@@ -1,0 +1,21 @@
+{
+  "lang" : "ja",
+  "nav" : {
+    "pokedex" : "図鑑",
+    "quiz" : "クイズ",
+    "language" : "日本語"
+  },
+  "search" : {
+    "type" : "タイプ",
+    "result" : "の検索結果"
+  },
+  "detail" : {
+    "height" : "高さ",
+    "weight" : "重さ",
+    "abilities" : "特性",
+    "evolutions" : "進化",
+    "notEvolve" : "進化しない",
+    "effectiveness" : "タイプ相性(特性なし)",
+    "stats" : "種族値"
+  }
+}

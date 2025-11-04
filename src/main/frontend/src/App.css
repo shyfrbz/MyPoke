@@ -1,12 +1,12 @@
 @import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
 
-body, #root, .wrapper {
+body, #root {
     font-family: 'Galmuri11', sans-serif;
     min-height: 100vh;
     margin: 0;
 }
 
-#root, .wrapper {
+#root {
     display: flex;
     flex-direction: column;
 }
@@ -28,4 +28,17 @@ body, #root, .wrapper {
 /* 화살표 색상 변경 */
 .tooltip-arrow::before {
     border-right-color: Gainsboro !important; /* 배경색과 맞추기 */
+}
+
+.dropdown-menu {
+    background: rgba(255, 255, 255, 0.9) !important; /* 반투명 흰색 */
+    backdrop-filter: blur(8px); /* 배경 블러 효과 */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* 은은한 테두리 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 부드러운 그림자 */
+}
+.dropdown-item {
+    color: #212529 !important; /* 글자색 */
+}
+.dropdown-item:hover {
+    background-color: #e9ecef !important; /* 호버 시 색상 */
 }

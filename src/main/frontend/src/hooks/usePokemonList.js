@@ -1,5 +1,6 @@
 import {useCallback, useEffect, useRef, useState} from "react";
 import {BASE_URL, getPokemonData, getTypeIds} from "../utils/pokemon";
+import {useTranslation} from "react-i18next";
 
 function usePokemonList() {
     const [list, setList] = useState([]);
@@ -51,7 +52,7 @@ function usePokemonList() {
                 return {
                     id:p.pokemon.id,
                     img: p.pokemon.sprites?.front_default,
-                    name: p.species.names?.find(n => n.language.name === 'ko')?.name,
+                    name: p.species.names,
                     types: p.pokemon.types
                 }
             })
