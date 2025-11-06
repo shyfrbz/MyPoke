@@ -14,7 +14,7 @@ function Home() {
                 <Link to={"/list"}>
                     <span>{t('nav.pokedex')}</span>
                 </Link>
-                <Link to={"/quiz"}>
+                <Link to={"/quiz/setup"}>
                     <span>{t('nav.quiz')}</span>
                 </Link>
             </div>

@@ -6,8 +6,9 @@ import { useTranslation } from 'react-i18next';
 function Header() {
     const { i18n, t } = useTranslation();
 
-    const changeLanguage = (lng) => {
-        i18n.changeLanguage(lng);
+    const changeLanguage = (lang) => {
+        i18n.changeLanguage(lang);
+        localStorage.setItem('lang', lang);
     };
 
     return (
@@ -22,7 +23,7 @@ function Header() {
                     <Navbar.Collapse className="justify-content-end">
                         <Nav className="ms-auto">
                             <Nav.Link href="/list" className={styles.link}>{t('nav.pokedex')}</Nav.Link>
-                            <Nav.Link href="/quiz" className={styles.link}>{t('nav.quiz')}</Nav.Link>
+                            <Nav.Link href="/quiz/setup" className={styles.link}>{t('nav.quiz')}</Nav.Link>
                             <NavDropdown title={
                                 <>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

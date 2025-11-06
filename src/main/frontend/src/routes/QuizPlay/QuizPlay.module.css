@@ -1,0 +1,99 @@
+.wrapper {
+    border-radius: 20px;
+    background-color: #FFE2D9;
+    margin: 90px 20px 0 20px;
+    padding: 20px;
+    text-align: center;
+    min-height: 70vh;
+    outline: none;
+}
+
+.img {
+    width: 25%;
+    max-width: 950px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    user-select: none;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 950px) {
+    .img {
+        width: 90%;
+    }
+}
+
+.wrapper input {
+    width: 200px;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 2px solid #ef5350;
+    border-radius: 8px;
+    background: #fff;
+    text-align: center;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.wrapper input:focus {
+    border-color: #d32f2f;
+    box-shadow: 0 0 6px rgba(239, 83, 80, 0.4);
+}
+
+/* 제출 버튼 */
+.submitBtn {
+    margin-left: 10px;
+    padding: 10px 16px;
+    background: #ef5350;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.submitBtn:hover {
+    background: #d32f2f;
+    transform: scale(1.05);
+}
+
+.submitBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 정답/오답 표시 */
+.wrapper p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.wrapper p:nth-of-type(1) {
+    color: #ef5350;
+}
+
+.wrapper h3 {
+    font-size: 22px;
+    color: #333;
+}
+
+/* 다음 문제 버튼 */
+.nextBtn {
+    margin-top: 20px;
+    background: #ef5350;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.nextBtn:hover {
+    background: #ef5350;
+    color: #fff;
+}
+

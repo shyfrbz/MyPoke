@@ -12,7 +12,7 @@ function DamageTable({damage}) {
                     .sort((a, b) => Number(b) - Number(a))
                     .map(key => (
                         <tr key={key}>
-                            <td className={styles.tdKey}>{key}배</td>
+                            <td className={styles.tdKey}>{key} x</td>
                             <td className={styles.tdVal}>
                                 {Array.isArray(damage[key]) && damage[key].map((item, index) =>
                                     <TypeBtn key={index} id={item}/>)}

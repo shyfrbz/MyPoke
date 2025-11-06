@@ -10,7 +10,8 @@ import Detail from "./routes/Detail/Detail";
 import Home from "./routes/Home/Home";
 import TypeList from "./routes/TypeList/TypeList";
 import SearchList from "./routes/SearchList/SearchList";
-import "./i18n";
+import QuizSetup from "./routes/QuizSetup/QuizSetup";
+import QuizPlay from "./routes/QuizPlay/QuizPlay";
 
 function App() {
     return (
@@ -20,6 +21,8 @@ function App() {
                 <Route path="/type/:id" element={<TypeList/>}/>
                 <Route path="/search/:keyword" element={<SearchList/>}/>
                 <Route path="/list" element={<List/>}/>
+                <Route path="/quiz/setup" element={<QuizSetup/>}/>
+                <Route path="/quiz/play" element={<QuizPlay/>}/>
                 <Route path={`${process.env.PUBLIC_URL}/`} element={<Home/>}/>
             </Routes>
         </Router>
