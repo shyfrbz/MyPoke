@@ -17,5 +17,19 @@
     "notEvolve" : "進化しない",
     "effectiveness" : "タイプ相性(特性なし)",
     "stats" : "種族値"
+  },
+  "quiz" : {
+    "pokemonQuiz" : "ポケモンクイズ",
+    "selectOption" : "オプションを選択してください!",
+    "gen" : "世代",
+    "allGen" : "全体",
+    "count" : "問題数",
+    "shadowMode" : "シルエットモード",
+    "off" : "オフ",
+    "on" : "オン",
+    "start" : "スタート",
+    "correct" : "正解!",
+    "wrong" : "不正解!",
+    "next" : "次の問題"
   }
 }

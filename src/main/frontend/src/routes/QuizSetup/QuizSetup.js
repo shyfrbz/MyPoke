@@ -4,8 +4,10 @@ import styles from "./QuizSetup.module.css"
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import genRange from "../../data/genRange";
+import {useTranslation} from "react-i18next";
 
 function QuizSetup() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [gen, setGen] = useState(0);
     const [count, setCount] = useState(10);
@@ -26,11 +28,15 @@ function QuizSetup() {
             <Container>
                 <div className={styles.wrapper}>
                     <h1 className={styles.title}>
-                        포켓몬 퀴즈
+                        {t('quiz.pokemonQuiz')}
                     </h1>
 
+                    <p className={styles.sub}>
+                        {t('quiz.selectOption')}
+                    </p>
+
                     <div className={styles.section}>
-                        <p className={styles.label}>세대 선택</p>
+                        <p className={styles.label}>{t('quiz.gen')}</p>
                         <div className={styles.buttonGroup}>
                             {gens.map((g) => (
                                 <button
@@ -38,14 +44,14 @@ function QuizSetup() {
                                     onClick={() => setGen(g)}
                                     className={`${styles.optionButton} ${gen === g ? styles.active : ""}`}
                                 >
-                                    {g === 0 ? "전체" : g}
+                                    {g === 0 ? t('quiz.allGen') : g}
                                 </button>
                             ))}
                         </div>
                     </div>
 
                     <div className={styles.section}>
-                        <p className={styles.label}>문제 개수</p>
+                        <p className={styles.label}>{t('quiz.count')}</p>
                         <div className={styles.buttonGroup}>
                             {counts.map((c) => (
                                 <button
@@ -61,23 +67,23 @@ function QuizSetup() {
                     </div>
 
                     <div className={styles.section}>
-                        <p className={styles.label}>그림자 모드</p>
+                        <p className={styles.label}>{t('quiz.shadowMode')}</p>
                         <div className={styles.buttonGroup}>
                             <button
                                 onClick={() => setShadow(false)}
                                 className={`${styles.optionButton} ${!shadow ? styles.active : ""}`}
                             >
-                                일반
+                                {t('quiz.off')}
                             </button>
                             <button
                                 onClick={() => setShadow(true)}
                                 className={`${styles.optionButton} ${shadow ? styles.active : ""}`}
                             >
-                                그림자
+                                {t('quiz.on')}
                             </button>
                         </div>
                     </div>
-                    <button className={styles.startButton} onClick={clickStart}>시작하기 ▶</button>
+                    <button className={styles.startButton} onClick={clickStart}>{t('quiz.start')} ▶</button>
                 </div>
             </Container>
         </Layout>

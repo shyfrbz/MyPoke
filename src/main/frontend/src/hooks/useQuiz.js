@@ -9,7 +9,7 @@ function useQuiz({ gen, count, shadow }){
     const [isAnswered, setIsAnswered] = useState(false);
     const [isCorrect, setIsCorrect] = useState(null);
 
-    const { i18n, t } = useTranslation();
+    const { i18n } = useTranslation();
     const lang = i18n.language.slice(0, 2);
 
     // 출제할 포켓몬 도감번호 필터링
@@ -28,6 +28,7 @@ function useQuiz({ gen, count, shadow }){
     const currentQuiz = quizList[currentIdx];
     const isFinished = currentIdx >= quizList.length;
 
+    // 정답 제출
     const submitAnswer = (userAnswer) => {
         if (!currentQuiz || isAnswered) return;
 
@@ -37,14 +38,17 @@ function useQuiz({ gen, count, shadow }){
         if (correct) setScore((prev) => prev + 1);
     };
 
+    // 다음 문제
     const nextQuestion = () => {
         setIsAnswered(false);
         setIsCorrect(null);
         setCurrentIdx((prev) => prev + 1);
     };
 
+    // 그림자모드 css 변환
     const getImageStyle = () => {
         if (!shadow) return {};
+        if (isAnswered) return {};
         return {
             filter: "brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(100%) hue-rotate(0deg) brightness(0%) contrast(100%)",
         };
@@ -57,6 +61,7 @@ function useQuiz({ gen, count, shadow }){
         score,
         isAnswered,
         isCorrect,
+        isFinished,
         submitAnswer,
         nextQuestion,
         getImageStyle,

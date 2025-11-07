@@ -7,11 +7,11 @@ import {useTranslation} from "react-i18next";
 import styles from "./QuizPlay.module.css";
 
 function QuizPlay() {
-    const { i18n } = useTranslation();
+    const {i18n, t} = useTranslation();
     const lang = i18n.language.slice(0, 2);
     const location = useLocation();
     const navigate = useNavigate();
-    const { options } = location.state || {};
+    const {options} = location.state || {};
 
     const [input, setInput] = useState("");
     const quiz = useQuiz(options);
@@ -22,7 +22,7 @@ function QuizPlay() {
         if (!options) navigate("/quiz/setup");
     }, [options, navigate]);
 
-    // ✅ 문제 바뀔 때마다 input 혹은 wrapper에 포커스
+    // 정답 제출 / 다음 문제 넘어갈 때 포커스 변경(엔터로 이동하게끔)
     useEffect(() => {
         if (!quiz.isAnswered) {
             inputRef.current?.focus();
@@ -30,6 +30,13 @@ function QuizPlay() {
             wrapperRef.current?.focus();
         }
     }, [quiz.currentIdx, quiz.isAnswered]);
+
+    // 문제 풀이 종료 시 결과 화면으로 이동
+    useEffect(() => {
+        if (quiz.isFinished) {
+            navigate('/quiz/result', {state: {score : quiz.score, count : options.count}});
+        }
+    }, [quiz.isFinished, quiz.score, options.count, navigate])
 
     if (!options || !quiz.currentQuiz) return null;
 
@@ -60,7 +67,7 @@ function QuizPlay() {
                     ref={wrapperRef}
                     className={styles.wrapper}
                     onKeyDown={handleKeyDown}
-                    tabIndex={0} // ✅ 키 입력 받기용
+                    tabIndex={0} // 엔터로 다음 넘어가게 하기 위해 넣음
                 >
                     <img
                         src={quiz.currentQuiz.img.official}
@@ -80,9 +87,9 @@ function QuizPlay() {
                         </div>
                     ) : (
                         <div>
-                            <p>{quiz.isCorrect ? "정답!" : "오답!"}</p>
+                            <p>{quiz.isCorrect ? t('quiz.correct') : t('quiz.wrong')}</p>
                             <h3>{quiz.currentQuiz.names[lang]}</h3>
-                            <button onClick={quiz.nextQuestion} className={styles.nextBtn}>다음 문제</button>
+                            <button onClick={quiz.nextQuestion} className={styles.nextBtn}>{t('quiz.next')}</button>
                         </div>
                     )}
                 </div>

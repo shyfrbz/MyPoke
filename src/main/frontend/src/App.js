@@ -12,6 +12,7 @@ import TypeList from "./routes/TypeList/TypeList";
 import SearchList from "./routes/SearchList/SearchList";
 import QuizSetup from "./routes/QuizSetup/QuizSetup";
 import QuizPlay from "./routes/QuizPlay/QuizPlay";
+import QuizResult from "./routes/QuizResult/QuizResult";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/list" element={<List/>}/>
                 <Route path="/quiz/setup" element={<QuizSetup/>}/>
                 <Route path="/quiz/play" element={<QuizPlay/>}/>
+                <Route path="/quiz/result" element={<QuizResult/>}/>
                 <Route path={`${process.env.PUBLIC_URL}/`} element={<Home/>}/>
             </Routes>
         </Router>

@@ -17,5 +17,19 @@
     "notEvolve" : "This Pokémon does not evolve.",
     "effectiveness" : "Type Effectiveness(Ability not applied)",
     "stats" : "Stats"
+  },
+  "quiz" : {
+    "pokemonQuiz" : "Pokémon Quiz",
+    "selectOption" : "Please select options!",
+    "gen" : "Generations",
+    "allGen" : "Full",
+    "count" : "Number of quiz",
+    "shadowMode" : "Shadow Mode",
+    "off" : "Off",
+    "on" : "On",
+    "start" : "Start!",
+    "correct" : "Correct!",
+    "wrong" : "Wrong!",
+    "next" : "Next"
   }
 }

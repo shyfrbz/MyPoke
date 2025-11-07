@@ -17,5 +17,19 @@
     "notEvolve" : "진화하지 않는 포켓몬입니다.",
     "effectiveness" : "방어상성(특성 미적용)",
     "stats" : "종족치"
+  },
+  "quiz" : {
+    "pokemonQuiz" : "포켓몬 퀴즈",
+    "selectOption" : "옵션을 선택해주세요!",
+    "gen" : "세대",
+    "allGen" : "전체",
+    "count" : "퀴즈 개수",
+    "shadowMode" : "그림자 모드",
+    "off" : "일반",
+    "on" : "그림자",
+    "start" : "시작하기",
+    "correct" : "정답!",
+    "wrong" : "오답!",
+    "next" : "다음 문제"
   }
 }
