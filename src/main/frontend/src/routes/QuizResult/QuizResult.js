@@ -4,6 +4,7 @@ import {Container} from "react-bootstrap";
 import styles from "./QuizResult.module.css";
 import rank from "../../data/rank";
 import {useTranslation} from "react-i18next";
+import ribbon from "../../assets/images/ribbon.png";
 
 function QuizResult() {
     const {i18n, t} = useTranslation();
@@ -24,12 +25,25 @@ function QuizResult() {
         <Layout>
             <Container>
                 <div className={styles.wrapper}>
-                    <h4>결과 발표</h4>
-                    <h2>「{userRank.names[lang]}」급!</h2>
-                    <p>
-                        점수 : {score} / {count}
+                    <div className={styles.titleWrapper}>
+                        <img src={ribbon} alt="ribbon" className={styles.ribbon}/>
+                        <h3 className={styles.title}>{t('quiz.result')}</h3>
+                    </div>
+                    <div className={styles.imgWrapper}>
+                        <img src={userRank.img[Math.floor(Math.random() * userRank.img.length)]}
+                             alt={userRank.names[lang]}
+                             className={styles.img}/>
+                    </div>
+                    <h2 className={styles.rank}>「{userRank.names[lang]}」 {t('quiz.rank')}</h2>
+                    <div className={styles.scoreBar}>
+                        <div className={styles.fill} style={{width: `${(score / count) * 100}%`}}/>
+                    </div>
+                    <p className={styles.score}>
+                        {score} / {count}
                     </p>
-                    <button onClick={() => navigate("/quiz/setup")}>다시하기</button>
+                    <button onClick={() => navigate("/quiz/setup")}
+                            className={styles.retryBtn}>{t('quiz.retry')}
+                    </button>
                 </div>
             </Container>
         </Layout>

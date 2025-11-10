@@ -30,6 +30,9 @@
     "start" : "Start!",
     "correct" : "Correct!",
     "wrong" : "Wrong!",
-    "next" : "Next"
+    "next" : "Next",
+    "result" : "Result",
+    "rank" : "Level!",
+    "retry" : "Retry"
   }
 }
