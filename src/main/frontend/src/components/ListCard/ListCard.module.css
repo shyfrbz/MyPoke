@@ -11,3 +11,11 @@
     margin:10px;
     min-height: 300px;
 }
+
+@media (max-width: 950px) {
+    .card {
+        width: 170px;
+        margin:7px 5px;
+        min-height: 250px;
+    }
+}

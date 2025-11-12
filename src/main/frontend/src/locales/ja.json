@@ -5,11 +5,15 @@
     "quiz" : "クイズ",
     "language" : "日本語"
   },
+  "title" : {
+    "pokedex" : "ポケモン図鑑"
+  },
   "search" : {
     "type" : "タイプ",
     "result" : "の検索結果"
   },
   "detail" : {
+    "type" : "タイプ",
     "height" : "高さ",
     "weight" : "重さ",
     "abilities" : "特性",

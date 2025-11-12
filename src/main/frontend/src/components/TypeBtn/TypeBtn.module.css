@@ -1,4 +1,4 @@
-.typeBtn{
+.typeBtn {
     padding: 6px 15px;
     margin: 3px;
     border-radius: 10px;
@@ -8,4 +8,11 @@
     gap: 4px;
     font-size: 15px;
     text-decoration: none;
+}
+
+@media (max-width: 950px) {
+    .typeBtn {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
 }

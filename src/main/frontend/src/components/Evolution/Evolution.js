@@ -22,7 +22,7 @@ function Evolution({evolution}) {
                         {e.data.map(p => (
                             <Link to={`/detail/${p.pokemon.id}`} key={p.pokemon.id} className="text-dark text-decoration-none">
                             <div className={`pokemon_card ${idx >= 3 ? styles.second_row : ""}`}>
-                                <img src={p.pokemon.sprites.front_default} alt={p.pokemon.name}/>
+                                <img src={p.pokemon.sprites.front_default} alt={p.pokemon.name} className={styles.img}/>
                                 <p>{p.species.names.find(n => n.language.name === lang)?.name || p.pokemon.name}</p>
                             </div>
                             </Link>

@@ -11,8 +11,6 @@ function useTypeList(typeId) {
             const response = await fetch(`${BASE_URL}/type/${typeId}`);
             const json = await response.json();
 
-            console.log(json);
-
             const ids = json.pokemon.reduce((a, p) => {
                 const parts = p.pokemon.url.split('/');
                 const id = parseInt(parts[parts.length - 2], 10);

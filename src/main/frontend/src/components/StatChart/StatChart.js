@@ -1,4 +1,5 @@
-import {ResponsiveBar} from '@nivo/bar'
+import {ResponsiveBar} from '@nivo/bar';
+import styles from './StatChart.module.css';
 
 function StatChart({data}) {
     const theme = {
@@ -13,7 +14,7 @@ function StatChart({data}) {
         }
     };
     return (
-        <div style={{width: 400, minWidth: 400, height: 300, minHeight: 300}}>
+        <div className={styles.wrapper}>
             <ResponsiveBar
                 data={data}
                 theme={theme}

@@ -5,17 +5,21 @@
     "quiz" : "Quiz",
     "language" : "English"
   },
+  "title" : {
+    "pokedex" : "Pokédex"
+  },
   "search" : {
     "type" : "Type",
     "result" : "Search results for"
   },
   "detail" : {
+    "type" : "Type",
     "height" : "Height",
     "weight" : "Weight",
     "abilities" : "Abilities",
     "evolutions" : "Evolutions",
     "notEvolve" : "This Pokémon does not evolve.",
-    "effectiveness" : "Type Effectiveness(Ability not applied)",
+    "effectiveness" : "Type Effectiveness",
     "stats" : "Stats"
   },
   "quiz" : {

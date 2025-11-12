@@ -7,10 +7,12 @@ import {useEffect, useRef} from "react";
 import Layout from "../../components/Layout";
 import Search from "../../components/Search/Search";
 import AllTypes from "../../components/AllTypes/AllTypes";
+import {useTranslation} from "react-i18next";
 
 function List() {
     const {loading, list, hasMore, getMore} = usePokemonList();
     const ref = useRef();
+    const { t } = useTranslation();
 
     // 무한스크롤 설정
     useEffect(() => {
@@ -41,6 +43,7 @@ function List() {
     return (
         <Layout loading={loading && list.length === 0}>
             <Container className={styles.list}>
+                <h2 className={styles.title}>{t('title.pokedex')}</h2>
                 <Search/>
                 <AllTypes/>
                 {list?.map(p =>

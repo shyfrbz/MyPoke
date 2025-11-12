@@ -31,3 +31,18 @@
     align-self: center;
     margin: 0 8px;
 }
+
+@media (max-width: 950px) {
+    .evolution_wrapper{
+        gap:0;
+    }
+    .pokemon_card {
+        max-width: 40px;
+    }
+    .arrow {
+        margin: 0;
+    }
+    .img{
+        width:80%;
+    }
+}

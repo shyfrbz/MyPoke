@@ -16,12 +16,13 @@ import DamageTable from "../../components/DamageTable/DamageTable";
 import Evolution from "../../components/Evolution/Evolution";
 import Layout from "../../components/Layout";
 import {useTranslation} from "react-i18next";
+import types from "../../data/types";
 
 function Detail() {
     const {id} = useParams();
     const {loading, info} = usePokemonDetail(id);
 
-    const { i18n, t } = useTranslation();
+    const {i18n, t} = useTranslation();
     const lang = i18n.language.slice(0, 2);
 
     // 보여줄 요소들 지정
@@ -31,8 +32,8 @@ function Detail() {
     // 첫 도감 설명
     const pokemonDesc = info.species?.flavor_text_entries?.find(n => n.language.name === lang)?.flavor_text;
     const pokemonGenera = info.species?.genera?.find(g => g.language.name === lang)?.genus;
-    const types = getTypeIds(info.pokemon.types);
-    const damage = useTypeCalc(types);
+    const pokemonTypes = getTypeIds(info.pokemon.types);
+    const damage = useTypeCalc(pokemonTypes);
 
     // 성별 버튼
     let hasFemale = info.pokemon.sprites?.front_female !== null && info.pokemon.sprites?.front_female !== undefined;
@@ -79,8 +80,17 @@ function Detail() {
         <Layout loading={loading || !info.pokemon}>
             <div className={styles.wrapper}>
                 {/*왼쪽 사진 부분*/}
-                <div>
-                    <h2>{id.toString().padStart(4, "0")} / {pokemonName}</h2>
+                <div className={styles.section01}>
+                    <div className={styles.nameWrapper}>
+                        {/*도감번호 배경색에 66 더한 것은 투명도 조절 역할, bright보다 더 연한 색상으로 출력*/}
+                        <div className={styles.id}
+                             style={{background:types?.find(t => t.id === Number(pokemonTypes?.[0]))?.color?.bright + '66'}}>
+                            {id.toString().padStart(4, "0")}
+                        </div>
+                        <div className={styles.name}>
+                            {pokemonName}
+                        </div>
+                    </div>
                     <img
                         src={
                             femaleBtn
@@ -92,81 +102,120 @@ function Detail() {
                                     : info?.pokemon?.sprites?.other["home"].front_default)
                         }
                         alt={id}
+                        className={styles.img}
                     />
-                    <hr/>
-                    {hasFemale ? (
-                        <button onClick={onFemaleClick} className={styles.femaleBtn}>
-                            {femaleBtn ? (
-                                <MaleIcon width={24.66} height={20} fill={"white"}/>
-                            ) : (
-                                <FemaleIcon width={24.66} height={20} fill={"white"}/>
-                            )}
+                    <div className={styles.btnWrapper}>
+                        {hasFemale ? (
+                            <button onClick={onFemaleClick} className={styles.femaleBtn}>
+                                {femaleBtn ? (
+                                    <MaleIcon width={24.66} height={20} fill={"white"}/>
+                                ) : (
+                                    <FemaleIcon width={24.66} height={20} fill={"white"}/>
+                                )}
+                            </button>
+                        ) : ("")}
+                        <button onClick={onShinyClick} className={styles.shinyBtn}>
+                            <ShinyIcon width={24.66} height={20} fill={"white"}/>
                         </button>
-                    ) : ("")}
-                    <button onClick={onShinyClick} className={styles.shinyBtn}>
-                        <ShinyIcon width={24.66} height={20} fill={"white"}/>
-                    </button>
-                    <button onClick={soundOn} className={styles.soundBtn}>
-                        <SoundIcon width={24.66} height={20} fill={"white"}/>
-                    </button>
+                        <button onClick={soundOn} className={styles.soundBtn}>
+                            <SoundIcon width={24.66} height={20} fill={"white"}/>
+                        </button>
+                    </div>
                 </div>
 
                 {/*오른쪽 정보 부분*/}
-                <div>
-                    <div>
-                        {types?.map(i => (
-                            <TypeBtn key={i} id={i}/>
-                        ))}
-                    </div>
-                    <h4>{pokemonGenera}</h4>
-                    <p>{pokemonDesc}</p>
-                    <div>
-                        {t('detail.height')} : {info.pokemon.height / 10} m | {t('detail.weight')} : {info.pokemon.weight / 10} kg
-                    </div>
+                <div className={styles.section02}>
+                    <table className={styles.infoTable}>
+                        <tbody>
+                        <tr>
+                            <td colSpan={2} className={styles.infoTitle}>
+                                <p>{pokemonGenera}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className={styles.infoLabel}>
+                                {t('detail.height')}
+                            </td>
+                            <td className={styles.infoValue}>
+                                {info.pokemon.height / 10} m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className={styles.infoLabel}>
+                                {t('detail.weight')}
+                            </td>
+                            <td className={styles.infoValue}>
+                                {info.pokemon.weight / 10} kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className={styles.infoLabel}>
+                                {t('detail.type')}
+                            </td>
+                            <td className={styles.infoValue}>
+                                {pokemonTypes?.map(i => (
+                                    <TypeBtn key={i} id={i}/>
+                                ))}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className={styles.infoLabel}>
+                                {t('detail.abilities')}
+                            </td>
+                            <td className={styles.infoValue}>
+                                {info.abilities?.map((a, idx) => (
+                                    <div key={idx} className={styles.ablilty}>
+                                        {info.pokemon.abilities[idx]?.is_hidden ?
+                                            <span className={styles.hiddenMark}>*</span> : ""}
+                                        {a.names.filter(n => n.language.name === lang).pop()?.name}
+                                        <OverlayTrigger
+                                            key={idx}
+                                            placement="right"
+                                            delay={{show: 250, hide: 250}}
+                                            overlay={
+                                                <Tooltip id={`tooltip-right`}>
+                                                    {a.flavor_text_entries.filter(n => n.language.name === lang).pop()?.flavor_text}
+                                                </Tooltip>
+                                            }
+                                            popperConfig={{
+                                                strategy: 'fixed',
+                                                modifiers: [
+                                                    {name: 'computeStyles', options: {adaptive: false}},
+                                                    {
+                                                        name: 'preventOverflow',
+                                                        options: {boundary: 'viewport', padding: 8}
+                                                    },
+                                                    {
+                                                        name: 'flip',
+                                                        options: {fallbackPlacements: ['left', 'top', 'bottom']}
+                                                    },
+                                                ],
+                                            }}
+                                        >
+                                            <InfoIcon className={styles.infoIcon} fill={"lightgray"}/>
+                                        </OverlayTrigger>
+                                    </div>
+                                ))}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2} className={styles.infoDesc}>
+                                {pokemonDesc}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div className={styles.divider}></div>
 
-                    <div>
-                        <h4>{t('detail.abilities')}</h4>
-                        {info.abilities?.map((a, idx) => (
-                            <div key={idx} className={styles.ablilty}>
-                                {info.pokemon.abilities[idx]?.is_hidden ?
-                                    <span className={styles.hiddenMark}>*</span> : ""}
-                                {a.names.filter(n => n.language.name === lang).pop()?.name}
-                                <OverlayTrigger
-                                    key={idx}
-                                    placement="right"
-                                    delay={{show: 250, hide: 250}}
-                                    overlay={
-                                        <Tooltip id={`tooltip-right`}>
-                                            {a.flavor_text_entries.filter(n => n.language.name === lang).pop()?.flavor_text}
-                                        </Tooltip>
-                                    }
-                                    popperConfig={{
-                                        strategy: 'fixed',
-                                        modifiers: [
-                                            {name: 'computeStyles', options: {adaptive: false}},
-                                            {
-                                                name: 'preventOverflow',
-                                                options: {boundary: 'viewport', padding: 8}
-                                            },
-                                            {
-                                                name: 'flip',
-                                                options: {fallbackPlacements: ['left', 'top', 'bottom']}
-                                            },
-                                        ],
-                                    }}
-                                >
-                                    <InfoIcon className={styles.infoIcon} fill={"lightgray"}/>
-                                </OverlayTrigger>
-                            </div>
-                        ))}
-                    </div>
-                    <h4>{t('detail.evolutions')}</h4>
+                    <p className={styles.label}>{t('detail.evolutions')}</p>
                     <Evolution evolution={info.evolution}/>
+                    <div className={styles.divider}></div>
 
-                    <h4>{t('detail.effectiveness')}</h4>
+                    <p className={styles.label}>{t('detail.effectiveness')}</p>
                     <DamageTable damage={damage}/>
+                    <div className={styles.divider}></div>
 
-                    <h4>{t('detail.stats')}({allStat})</h4>
+                    <p className={styles.label}>{t('detail.stats')}({allStat})</p>
                     <StatChart data={statData}/>
 
                 </div>

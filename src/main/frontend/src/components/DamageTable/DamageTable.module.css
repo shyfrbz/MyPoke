@@ -1,15 +1,47 @@
-.damageTable{
-    width:400px;
-    border: 1.5px solid dimgray;
+.wrapper{
+    margin-bottom: 40px;
 }
-.damageTable tr, .damageTable td{
-    border: 1.5px solid dimgray;
+.damageTable {
+    width: 100%;
+    max-width: 500px;
+    border-collapse: collapse;
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
 
+.damageTable tr {
+    border-bottom: 1px solid #D1D1D1;
 }
-.tdKey{
-    width:20%;
+
+.damageTable tr:last-child {
+    border-bottom: none;
+}
+
+.damageTable td {
+    padding: 8px 5px;
+}
+
+.tdKey {
     text-align: center;
+    width: 17%;
+    font-size: 15px;
+    font-weight: 600;
+    color:#555;
+    background-color: #eaeaea;
 }
-.tdVal{
-    width:80%;
+
+.tdVal {
+    width: 82%;
+}
+
+@media (max-width: 950px) {
+    .damageTable {
+        max-width: 100%;
+    }
+    .tdKey, .tdVal {
+        font-size: 13px;
+    }
 }

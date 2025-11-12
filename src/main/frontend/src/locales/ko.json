@@ -5,11 +5,15 @@
     "quiz" : "퀴즈",
     "language" : "한국어"
   },
+  "title" : {
+    "pokedex" : "포켓몬 도감"
+  },
   "search" : {
     "type" : "타입",
     "result" : "검색결과"
   },
   "detail" : {
+    "type" : "타입",
     "height" : "신장",
     "weight" : "체중",
     "abilities" : "특성",

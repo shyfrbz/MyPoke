@@ -4,7 +4,7 @@ import TypeBtn from "../TypeBtn/TypeBtn";
 
 function DamageTable({damage}) {
     return (
-        <div>
+        <div className={styles.wrapper}>
             <table className={styles.damageTable}>
                 <tbody>
                 {damage && Object.keys(damage)
