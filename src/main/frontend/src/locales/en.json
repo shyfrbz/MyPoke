@@ -10,7 +10,8 @@
   },
   "search" : {
     "type" : "Type",
-    "result" : "Search results for"
+    "result" : "Search results for",
+    "placeholder":  "Name or Number"
   },
   "detail" : {
     "type" : "Type",

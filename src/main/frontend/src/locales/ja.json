@@ -10,7 +10,8 @@
   },
   "search" : {
     "type" : "タイプ",
-    "result" : "の検索結果"
+    "result" : "の検索結果",
+    "placeholder":  "名前や図鑑番号"
   },
   "detail" : {
     "type" : "タイプ",

@@ -11,7 +11,7 @@ function Search() {
     const [dropdownIdx, setDropdownIdx] = useState(-1);       // 드롭다운 리스트 중 선택된 인덱스
 
     const navigate = useNavigate();
-    const {i18n} = useTranslation();
+    const {i18n,t} = useTranslation();
     const lang = i18n.language.slice(0, 2);
 
     // 히라가나 → 가타카나 변환 함수
@@ -113,6 +113,7 @@ function Search() {
             <input className={styles.input}
                    type="text"
                    value={keyword}
+                   placeholder={t('search.placeholder')}
                    onChange={changeKeyword}
                    onKeyUp={handleDropdownKey}/>
             <span className={styles.icon} onClick={() => handleSearch()}>

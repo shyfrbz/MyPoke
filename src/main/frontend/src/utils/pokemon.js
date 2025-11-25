@@ -1,5 +1,4 @@
 // URL에서 마지막 앞 숫자(id) 추출
-
 export const getIdFromUrl = (url) => {
     const parts = url.split('/');
     return parts[parts.length - 2];
@@ -22,3 +21,14 @@ export const getPokemonData = async (id) => {
         species: speciesRes
     };
 };
+
+// 매일 랜덤 5마리 포켓몬 선정
+export const getTodayPokemon = (allPokemonData, totalCount = 1025) => { // totalCount는 도감 최대 번호
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+
+    return Array.from({ length: 5 }, (_, i) => {
+        const num = Math.floor((Math.abs(Math.sin(seed + i)) * totalCount)) + 1;
+        return allPokemonData.find(p => p.id === num); // 바로 정보 추출
+    }).filter(Boolean); // 혹시 없는 번호 제거
+}

@@ -84,7 +84,7 @@ function Detail() {
                     <div className={styles.nameWrapper}>
                         {/*도감번호 배경색에 66 더한 것은 투명도 조절 역할, bright보다 더 연한 색상으로 출력*/}
                         <div className={styles.id}
-                             style={{background:types?.find(t => t.id === Number(pokemonTypes?.[0]))?.color?.bright + '66'}}>
+                             style={{background: types?.find(t => t.id === Number(pokemonTypes?.[0]))?.color?.bright + '66'}}>
                             {id.toString().padStart(4, "0")}
                         </div>
                         <div className={styles.name}>
@@ -170,7 +170,8 @@ function Detail() {
                                         {a.names.filter(n => n.language.name === lang).pop()?.name}
                                         <OverlayTrigger
                                             key={idx}
-                                            placement="right"
+                                            placement="top"
+                                            trigger={['hover', 'focus', 'click']}
                                             delay={{show: 250, hide: 250}}
                                             overlay={
                                                 <Tooltip id={`tooltip-right`}>
@@ -187,12 +188,15 @@ function Detail() {
                                                     },
                                                     {
                                                         name: 'flip',
-                                                        options: {fallbackPlacements: ['left', 'top', 'bottom']}
+                                                        options: {fallbackPlacements: ['bottom', 'right', 'left']}
                                                     },
+
                                                 ],
                                             }}
                                         >
+                                            <span style={{cursor: 'pointer'}}>
                                             <InfoIcon className={styles.infoIcon} fill={"lightgray"}/>
+                                            </span>
                                         </OverlayTrigger>
                                     </div>
                                 ))}

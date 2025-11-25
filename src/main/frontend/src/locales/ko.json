@@ -10,7 +10,8 @@
   },
   "search" : {
     "type" : "타입",
-    "result" : "검색결과"
+    "result" : "검색결과",
+    "placeholder":  "이름 혹은 도감번호"
   },
   "detail" : {
     "type" : "타입",
