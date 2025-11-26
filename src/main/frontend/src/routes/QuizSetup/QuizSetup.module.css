@@ -89,3 +89,10 @@
     font-family: 'Galmuri9', sans-serif;
     font-weight: bold;
 }
+
+@media (max-width: 950px) {
+    .wrapper{
+        padding:10px;
+        margin: 70px 10px 20px 10px;
+    }
+}

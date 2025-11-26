@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useRef, useState} from "react";
-import {BASE_URL, getPokemonData, getTypeIds} from "../utils/pokemon";
-import {useTranslation} from "react-i18next";
+import {BASE_URL, getPokemonData} from "../utils/pokemon";
+// import {useTranslation} from "react-i18next";
 
 function usePokemonList() {
     const [list, setList] = useState([]);

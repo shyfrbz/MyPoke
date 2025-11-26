@@ -16,7 +16,7 @@ import QuizResult from "./routes/QuizResult/QuizResult";
 
 function App() {
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <Routes>
                 <Route path="/detail/:id" element={<Detail/>}/>
                 <Route path="/type/:id" element={<TypeList/>}/>
@@ -25,7 +25,7 @@ function App() {
                 <Route path="/quiz/setup" element={<QuizSetup/>}/>
                 <Route path="/quiz/play" element={<QuizPlay/>}/>
                 <Route path="/quiz/result" element={<QuizResult/>}/>
-                <Route path={`${process.env.PUBLIC_URL}/`} element={<Home/>}/>
+                <Route path="/" element={<Home/>}/>
             </Routes>
         </Router>
     );

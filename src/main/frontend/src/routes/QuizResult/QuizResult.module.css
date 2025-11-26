@@ -138,3 +138,9 @@
         transform: scale(1);
     }
 }
+
+@media (max-width: 950px) {
+    .wrapper{
+        margin: 70px 10px 20px 10px;
+    }
+}

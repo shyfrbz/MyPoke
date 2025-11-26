@@ -17,12 +17,6 @@
     margin-bottom: 20px;
 }
 
-@media (max-width: 950px) {
-    .img {
-        width: 90%;
-    }
-}
-
 .wrapper input {
     width: 200px;
     padding: 10px 14px;
@@ -95,5 +89,23 @@
 .nextBtn:hover {
     background: #d32f2f;
     color: #fff;
+}
+
+@media (max-width: 950px) {
+    .wrapper{
+        padding:10px;
+        margin: 70px 10px 20px 10px;
+    }
+    .img {
+        width: 80%;
+    }
+    .wrapper input {
+        width:180px;
+        padding: 6px 10px;
+    }
+    .submitBtn {
+        margin-left: 7px;
+        padding: 6px 12px;
+    }
 }
 

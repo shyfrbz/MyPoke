@@ -2,6 +2,7 @@ import {Navbar, Nav, NavDropdown, Container} from "react-bootstrap";
 import styles from "./Header.module.css";
 import {ReactComponent as PokeballIcon} from "../../assets/icons/pokeball.svg";
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 function Header() {
     const { i18n, t } = useTranslation();
@@ -15,15 +16,15 @@ function Header() {
         <header>
             <Navbar key="md" expand="md" data-bs-theme="dark" fixed="top" className={styles.navbar}>
                 <Container>
-                    <Navbar.Brand href="/" className={styles.logo}>
+                    <Navbar.Brand as={Link} to="/" className={styles.logo}>
                         <PokeballIcon width={32} height={32}/>
                         <span>MyPoké</span>
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                     <Navbar.Collapse className="justify-content-end">
                         <Nav className="ms-auto">
-                            <Nav.Link href="/list" className={styles.link}>{t('nav.pokedex')}</Nav.Link>
-                            <Nav.Link href="/quiz/setup" className={styles.link}>{t('nav.quiz')}</Nav.Link>
+                            <Nav.Link as={Link} to="/list" className={styles.link}>{t('nav.pokedex')}</Nav.Link>
+                            <Nav.Link as={Link} to="/quiz/setup" className={styles.link}>{t('nav.quiz')}</Nav.Link>
                             <NavDropdown title={
                                 <>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

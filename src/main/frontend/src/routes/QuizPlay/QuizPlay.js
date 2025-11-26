@@ -14,12 +14,14 @@ function QuizPlay() {
     const {options} = location.state || {};
 
     const [input, setInput] = useState("");
-    const quiz = useQuiz(options);
+    const dummyOptions = { gen: 1, count: 10, shadow: false };
+    const safeOptions = options || dummyOptions;
+    const quiz = useQuiz(safeOptions);
     const inputRef = useRef(null);
     const wrapperRef = useRef(null);
 
     useEffect(() => {
-        if (!options) navigate("/quiz/setup");
+        if (!options) navigate("/quiz/setup", { replace: true });
     }, [options, navigate]);
 
     // 정답 제출 / 다음 문제 넘어갈 때 포커스 변경(엔터로 이동하게끔)
@@ -34,9 +36,9 @@ function QuizPlay() {
     // 문제 풀이 종료 시 결과 화면으로 이동
     useEffect(() => {
         if (quiz.isFinished) {
-            navigate('/quiz/result', {state: {score : quiz.score, count : options.count}});
+            navigate('/quiz/result', {state: {score : quiz.score, count : safeOptions.count}});
         }
-    }, [quiz.isFinished, quiz.score, options.count, navigate])
+    }, [quiz.isFinished, quiz.score, safeOptions.count, navigate])
 
     if (!options || !quiz.currentQuiz) return null;
 

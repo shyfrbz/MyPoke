@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import styles from "./Home.module.css";
 import {useTranslation} from 'react-i18next';
 import Layout from "../../components/Layout";
@@ -12,6 +12,7 @@ import Search from "../../components/Search/Search";
 function Home() {
     const {i18n, t} = useTranslation();
     const lang = i18n.language.slice(0, 2);
+    const navigate = useNavigate();
 
     const todayPokemon = getTodayPokemon(allPokemonData);
 
@@ -37,7 +38,7 @@ function Home() {
                                     <div className={styles.cardPaddingWrapper}>
                                         <div
                                             className={styles.pokemonCard}
-                                            onClick={() => window.location.href = `/detail/${p.id}`}
+                                            onClick={() => navigate(`/detail/${p.id}`)}
                                             style={{ backgroundColor: cardColor }}
                                         >
                                             <img

@@ -5,6 +5,7 @@ import styles from "./QuizResult.module.css";
 import rank from "../../data/rank";
 import {useTranslation} from "react-i18next";
 import ribbon from "../../assets/images/ribbon.png";
+import {useEffect} from "react";
 
 function QuizResult() {
     const {i18n, t} = useTranslation();
@@ -13,10 +14,13 @@ function QuizResult() {
     const navigate = useNavigate();
     const {score, count} = location.state || {};
 
-    if (score === undefined) {
-        navigate("/quiz/setup");
-        return null;
-    }
+    useEffect(() => {
+        if (score === undefined) {
+            navigate("/quiz/setup", { replace: true });
+        }
+    }, [score, navigate]);
+
+    if (score === undefined) return null;
 
     const percent = Math.round((score / count) * 100);
     const userRank = rank.find(r => percent >= r.min && percent <= r.max);
