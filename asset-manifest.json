@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/MyPoke/static/css/main.84c43a56.css",
+    "main.css": "/MyPoke/static/css/main.5fa4d38b.css",
     "main.js": "/MyPoke/static/js/main.0b64cbff.js",
     "static/media/g_moyamo.png": "/MyPoke/static/media/g_moyamo.ed962e2b792ef364413c.png",
     "static/media/c_dandel.png": "/MyPoke/static/media/c_dandel.86d73cb4e820a2166700.png",
@@ -45,12 +45,12 @@
     "static/media/ice.svg": "/MyPoke/static/media/ice.cd2f90437e3fe39235a9adca860ce2d2.svg",
     "static/media/ghost.svg": "/MyPoke/static/media/ghost.ddf268314aed78d0524d47aa90e49187.svg",
     "static/media/flying.svg": "/MyPoke/static/media/flying.d17785038a59f3ce2121e423a2ded0f7.svg",
+    "index.html": "/MyPoke/index.html",
     "static/media/fighting.svg": "/MyPoke/static/media/fighting.f20d1bd24f0cde62bb378b672f0178aa.svg",
     "static/media/poison.svg": "/MyPoke/static/media/poison.43956925ad0376b77c7e3921caa3dc30.svg",
     "static/media/steel.svg": "/MyPoke/static/media/steel.cb91a92a3b5197e2cf61bc66592f42d1.svg",
     "static/media/sound.svg": "/MyPoke/static/media/sound.7383791d633e8793655aeba8840d4dad.svg",
     "static/media/ground.svg": "/MyPoke/static/media/ground.e567f4fc3f3422598757977865de57d8.svg",
-    "index.html": "/MyPoke/index.html",
     "static/media/dark.svg": "/MyPoke/static/media/dark.27fdc7ed2bd3294b9838b1882c20e225.svg",
     "static/media/water.svg": "/MyPoke/static/media/water.b6d13329535e4be9e9b4f8da4694faba.svg",
     "static/media/electric.svg": "/MyPoke/static/media/electric.bc35c5a3faf04b605c00967b94e93693.svg",
@@ -61,11 +61,11 @@
     "static/media/female.svg": "/MyPoke/static/media/female.d66a91b2f538d26160addf99c549b4d8.svg",
     "static/media/male.svg": "/MyPoke/static/media/male.1df35ba0a98a9ca77d081ce7e168b0d9.svg",
     "static/media/chevron-right.svg": "/MyPoke/static/media/chevron-right.597fe3d8ed529406dc9c3e43721773e3.svg",
-    "main.84c43a56.css.map": "/MyPoke/static/css/main.84c43a56.css.map",
+    "main.5fa4d38b.css.map": "/MyPoke/static/css/main.5fa4d38b.css.map",
     "main.0b64cbff.js.map": "/MyPoke/static/js/main.0b64cbff.js.map"
   },
   "entrypoints": [
-    "static/css/main.84c43a56.css",
+    "static/css/main.5fa4d38b.css",
     "static/js/main.0b64cbff.js"
   ]
 }
