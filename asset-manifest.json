@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/MyPoke/static/css/main.0161e55d.css",
+    "main.css": "/MyPoke/static/css/main.bd11b6fd.css",
     "main.js": "/MyPoke/static/js/main.0b64cbff.js",
     "static/media/g_moyamo.png": "/MyPoke/static/media/g_moyamo.ed962e2b792ef364413c.png",
     "static/media/c_dandel.png": "/MyPoke/static/media/c_dandel.86d73cb4e820a2166700.png",
@@ -61,11 +61,11 @@
     "static/media/female.svg": "/MyPoke/static/media/female.d66a91b2f538d26160addf99c549b4d8.svg",
     "static/media/male.svg": "/MyPoke/static/media/male.1df35ba0a98a9ca77d081ce7e168b0d9.svg",
     "static/media/chevron-right.svg": "/MyPoke/static/media/chevron-right.597fe3d8ed529406dc9c3e43721773e3.svg",
-    "main.0161e55d.css.map": "/MyPoke/static/css/main.0161e55d.css.map",
+    "main.bd11b6fd.css.map": "/MyPoke/static/css/main.bd11b6fd.css.map",
     "main.0b64cbff.js.map": "/MyPoke/static/js/main.0b64cbff.js.map"
   },
   "entrypoints": [
-    "static/css/main.0161e55d.css",
+    "static/css/main.bd11b6fd.css",
     "static/js/main.0b64cbff.js"
   ]
 }
