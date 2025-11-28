@@ -1,6 +1,6 @@
 # MyPoké
 
-> 포켓몬 트레이너를 위한 직관적인 포켓몬 도감과 퀴즈를 제공하는 웹 애플리케이션입니다.
+**포켓몬 트레이너를 위한 직관적인 포켓몬 도감과 퀴즈를 제공하는 웹 애플리케이션입니다.**
 
 <div>
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
